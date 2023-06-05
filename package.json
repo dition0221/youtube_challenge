@@ -1,0 +1,27 @@
+{
+  "name": "youtube_challenge",
+  "version": "1.0.0",
+  "description": "풀스택으로 Youtube와 비슷한 웹 사이트를 구성합니다. Challenge. YouTube Clone built using NodeJS, Express, MongoDB, Mongoose and ES6.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dition0221/youtube_challenge.git"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js"
+  },
+  "author": "dition0221",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dition0221/youtube_challenge/issues"
+  },
+  "homepage": "https://github.com/dition0221/youtube_challenge#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.1",
+    "@babel/node": "^7.22.1",
+    "@babel/preset-env": "^7.22.4",
+    "nodemon": "^2.0.22"
+  }
+}
