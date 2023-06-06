@@ -7,7 +7,7 @@
     "url": "git+https://github.com/dition0221/youtube_challenge.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "author": "dition0221",
   "license": "ISC",

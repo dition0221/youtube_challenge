@@ -11,7 +11,7 @@
 노마드 코더 정책 상 강의요약은 괜찮으나, 코드와 필기는 공개적인 곳에 올리면 안 됨.  
 필기 요약지는 암호화된 .zip 파일로 저장함.
 
-- **23-06-05** : #1.3 ~ #2.4 / Set up NodeJS and Packages (+Quiz)
+- **23-06-05** : #1.3 ~ #2.4 / Set up NodeJS and Packages (+ Quiz)
   - NodeJS : 브라우저 밖에서 사용할 수 있는 JavaScript 런타임
   - npm : NodeJS와 상호작용을 할 수 있는 JavaScript 언어를 위한 패키지 매니저
   - package.json : NodeJS에서 프로젝트 정보를 입력한 텍스트 파일
@@ -25,3 +25,22 @@
     - Express 패키지 : Back-End 서버를 만들 수 있는 패키지
     - babel 패키지 : 최신 JavaScript 문법을 사용할 수 있도록 해주는 컴파일러
     - nodemon 패키지 : 파일이 수정되는 것을 감시해 자동으로 script를 재실행해주는 패키지
+- **23-06-06** : #3.0 ~ #3.4 / Express Router (+ Code Challenge)
+  - Express 패키지로 서버 생성 및 실행하기
+  - Route 설정하기, GET request 처리하기, response 반환하기
+
+---
+
+- **23-06-07** : #3.5 ~ #3.10 / (+ Code Challenge)
+- **23-06-08** : #3.0 ~ #3.11 / (+ Quiz)
+- **23-06-09** : #4.0 ~ #4.8 / (+ Code Challenge)
+
+---
+
+1. 프로젝트 준비 및 패키지 설치
+   - NodeJS 설치
+   - package.json 생성 (npm init)
+   - 패키지 설치 { Express, babel, nodemon }
+2. 서버 생성 및 Route 설정
+   - Express를 이용해 서버 생성 및 실행
+   - Route 설정 (GET, req, res 등)
