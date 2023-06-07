@@ -28,10 +28,16 @@
 - **23-06-06** : #3.0 ~ #3.4 / Express Router (+ Code Challenge)
   - Express 패키지로 서버 생성 및 실행하기
   - Route 설정하기, GET request 처리하기, response 반환하기
+- **23-06-07** : #3.5 ~ #3.11 / Middleware (+ Code Challenge)
+  - Middleware : request와 response 사이에 위치하는 controller
+    - controller의 3번째 인자인 'next'를 사용해야함
+    - 'next();' 함수사용해 다음 controller를 실행함
+    - 서버.use() 메서드를 통해 어느 URL에서나 작동하는 global middleware로 설정 가능
+  - 패키지
+    - Morgan 패키지 : http method, path, status code, 응답시간 등의 log를 보여주는 서버의 미들웨어로 사용하는 패키지
 
 ---
 
-- **23-06-07** : #3.5 ~ #3.10 / (+ Code Challenge)
 - **23-06-08** : #3.0 ~ #3.11 / (+ Quiz)
 - **23-06-09** : #4.0 ~ #4.8 / (+ Code Challenge)
 
