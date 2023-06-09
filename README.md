@@ -35,11 +35,29 @@
     - 서버.use() 메서드를 통해 어느 URL에서나 작동하는 global middleware로 설정 가능
   - 패키지
     - Morgan 패키지 : http method, path, status code, 응답시간 등의 log를 보여주는 서버의 미들웨어로 사용하는 패키지
+- **23-06-08** : #3.0 ~ #3.11 / (+ Quiz)
+- **23-06-09** : #4.0 ~ #4.8 / Router (+ Code Challenge)
+  - Router
+    1. 생성 : const 라우터명 = express.Router();
+    2. 사용 : 서버명.use("루트URL", 라우터명); [전역 Middleware처럼 사용]
+    3. Router에 Controller 연결하기 (GET, POST 등)
+  - 코드 정리(분할 정복)
+    - import, export, export default
+  - URL Parameter
+    - URL 안에 변수를 포함시킬 수 있게 함
+    - ':변수명'으로 사용
+    - 'req.params' 파라미터를 통해 object 형식으로 값을 읽을 수 있음
+    - text로 이루어진 경로는 URL Parameter로 이루어진 경로보다 코드가 앞에 위치해야 함
+      - 해당 text가 URL Parameter로 인식할 수 있기 때문
+  - 정규식 : 문자열로부터 특정 정보를 추출해내는 방법
 
 ---
 
-- **23-06-08** : #3.0 ~ #3.11 / (+ Quiz)
-- **23-06-09** : #4.0 ~ #4.8 / (+ Code Challenge)
+- **23-06-12** : #5.0 ~ #5.6 / (+ Code Challenge)
+- **23-06-13** : #4.0 ~ #5.5 / (+ Quiz).
+- **23-06-14** : #5.7 ~ #6.6 / (+ Code Challenge)
+- **23-06-15** : #6.0 ~ #6.6 / (+ Code Challenge).
+- **23-06-16** : #6.7 ~ #6.10 / (+ Code Challenge)
 
 ---
 
@@ -50,3 +68,29 @@
 2. 서버 생성 및 Route 설정
    - Express를 이용해 서버 생성 및 실행
    - Route 설정 (GET, req, res 등)
+3. 미들웨어 설정
+   - 패키지 설치 { Morgan }
+   - Morgan을 전역 Middleware로 설정
+4. Router 설정
+   - Router로 URL 그룹화 (global, videos, users)
+   - Router와 Controller 분할 및 정복
+   - URL Parameter 및 정규식 사용
+
+---
+
+Router
+
+/ -> Home
+/join -> Join
+/login -> Login
+/search -> Search
+
+/users/:id -> See User
+/users/logout -> Log out
+/users/edit -> Edit My Profile
+/users/delete -> Delete My Profile
+
+/videos/:id -> Watch Video
+/videos/:id/edit -> Edit Video
+/videos/:id/delete -> Delete Video
+/videos/upload -> Upload Video
