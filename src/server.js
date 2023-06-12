@@ -1,6 +1,6 @@
 import express from "express"; // Server
 import morgan from "morgan"; // Middleware - Logger
-/* Router */
+// Router
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -15,6 +15,9 @@ const app = express();
 // Morgan - logger
 const loggerMiddleware = morgan("dev");
 app.use(loggerMiddleware);
+// Pug - View Engine
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views"); // Path of 'views' folder
 
 /* Router */
 app.use("/", globalRouter);

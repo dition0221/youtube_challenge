@@ -11,7 +11,7 @@
 노마드 코더 정책 상 강의요약은 괜찮으나, 코드와 필기는 공개적인 곳에 올리면 안 됨.  
 필기 요약지는 암호화된 .zip 파일로 저장함.
 
-- **23-06-05** : #1.3 ~ #2.4 / Set up NodeJS and Packages (+ Quiz)
+- **23-06-05 : #1.3 ~ #2.4 / Set up NodeJS and Packages (+ Quiz)**
   - NodeJS : 브라우저 밖에서 사용할 수 있는 JavaScript 런타임
   - npm : NodeJS와 상호작용을 할 수 있는 JavaScript 언어를 위한 패키지 매니저
   - package.json : NodeJS에서 프로젝트 정보를 입력한 텍스트 파일
@@ -25,18 +25,18 @@
     - Express 패키지 : Back-End 서버를 만들 수 있는 패키지
     - babel 패키지 : 최신 JavaScript 문법을 사용할 수 있도록 해주는 컴파일러
     - nodemon 패키지 : 파일이 수정되는 것을 감시해 자동으로 script를 재실행해주는 패키지
-- **23-06-06** : #3.0 ~ #3.4 / Express Router (+ Code Challenge)
+- **23-06-06 : #3.0 ~ #3.4 / Express Router (+ Code Challenge)**
   - Express 패키지로 서버 생성 및 실행하기
   - Route 설정하기, GET request 처리하기, response 반환하기
-- **23-06-07** : #3.5 ~ #3.11 / Middleware (+ Code Challenge)
+- **23-06-07 : #3.5 ~ #3.11 / Middleware (+ Code Challenge)**
   - Middleware : request와 response 사이에 위치하는 controller
     - controller의 3번째 인자인 'next'를 사용해야함
     - 'next();' 함수사용해 다음 controller를 실행함
     - 서버.use() 메서드를 통해 어느 URL에서나 작동하는 global middleware로 설정 가능
   - 패키지
     - Morgan 패키지 : http method, path, status code, 응답시간 등의 log를 보여주는 서버의 미들웨어로 사용하는 패키지
-- **23-06-08** : #3.0 ~ #3.11 / (+ Quiz)
-- **23-06-09** : #4.0 ~ #4.8 / Router (+ Code Challenge)
+- **23-06-08 : #3.0 ~ #3.11 / (+ Quiz)**
+- **23-06-09 : #4.0 ~ #4.8 / Router (+ Code Challenge)**
   - Router
     1. 생성 : const 라우터명 = express.Router();
     2. 사용 : 서버명.use("루트URL", 라우터명); [전역 Middleware처럼 사용]
@@ -50,14 +50,32 @@
     - text로 이루어진 경로는 URL Parameter로 이루어진 경로보다 코드가 앞에 위치해야 함
       - 해당 text가 URL Parameter로 인식할 수 있기 때문
   - 정규식 : 문자열로부터 특정 정보를 추출해내는 방법
+- **23-06-12 : #5.0 ~ #5.6 / Template (+ Code Challenge)**
+  - Pug 패키지 : 템플릿(template)을 이용해 뷰(view)를 만드는 것을 도와주는 템플릿 엔진 또는 뷰 엔진
+    - compile 시 일반적인 HTML파일로 바꾸어줌
+    - 설치법
+      1. 'npm i pug'로 Pug 패키지 설치
+      2. Express에서 Pug를 View Engine으로 사용한다고 설정
+      3. Express에서 view에 대한 경로 설정
+    - 사용법
+      - controller에서 'res.render("파일명")' 메서드를 사용해 렌더링
+    - JavaScript 사용 가능
+      - '#{}' 괄호를 사용해 JavaScript 코드를 사용 가능
+      - controller에서 'res.render("파일명", {변수})' 메서드를 사용해 변수 전달 가능
+        - 변수는 하나의 객체를 이용해 키-값으로 전달
+    - partial : 반복적인 코드를 재사용할 수 있는 기능
+      - 'include' 예약어를 사용해 다른(partial) 파일을 포함시킬 수 있음
+    - Inheritance(상속) : 일종의 base를 만들고, 그 base로부터 확장(extend)해 나가는 것
+      - HTML의 base를 가질 수 있으며, 일부분은 수정 가능
+      - 'extends' 예약어를 사용해 base 파일을 사용
+      - 'block'을 사용해 일부분 수정이 가능
 
 ---
 
-- **23-06-12** : #5.0 ~ #5.6 / (+ Code Challenge)
-- **23-06-13** : #4.0 ~ #5.5 / (+ Quiz).
-- **23-06-14** : #5.7 ~ #6.6 / (+ Code Challenge)
-- **23-06-15** : #6.0 ~ #6.6 / (+ Code Challenge).
-- **23-06-16** : #6.7 ~ #6.10 / (+ Code Challenge)
+- **23-06-13 : #4.0 ~ #5.5 / (+ Quiz)**
+- **23-06-14 : #5.7 ~ #6.6 / (+ Code Challenge)**
+- **23-06-15 : #6.0 ~ #6.6 / (+ Code Challenge)**
+- **23-06-16 : #6.7 ~ #6.10 / (+ Code Challenge)**
 
 ---
 
@@ -75,6 +93,10 @@
    - Router로 URL 그룹화 (global, videos, users)
    - Router와 Controller 분할 및 정복
    - URL Parameter 및 정규식 사용
+5. View Engine (Pug) 설정
+   - View Engine 설정 및 경로 설정
+   - partial, extends, block 등을 사용해 코드 재사용 가능
+   - JavaScript 코드 사용 가능
 
 ---
 
