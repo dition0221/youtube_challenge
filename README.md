@@ -69,11 +69,24 @@
       - HTML의 base를 가질 수 있으며, 일부분은 수정 가능
       - 'extends' 예약어를 사용해 base 파일을 사용
       - 'block'을 사용해 일부분 수정이 가능
+- **23-06-13 : #4.0 ~ #5.5 / (+ Quiz)**
+- **23-06-14 : #5.7 ~ #6.6 / (+ Code Challenge)**
+  - Pug
+    - element에서 변수 하나만 사용하는 경우(=variable)
+    - 조건문(if/else), 반복문(each..in../while)
+    - Mixin : HTML을 return 해주는 일종의 function
+    - JS의 템플릿 리터럴 사용 가능 (`${}`)
+  - ES6
+    - 객체의 프로퍼티값을 가져올 때 shortcut 사용 가능
+  - POST method
+    - http POST method를 사용해 form 내용을 브라우저에서 Back-End로 데이터를 보낼 수 있음
+    - form(method="POST")와 input(name)속성은 필수적으로 필요함
+    - Express의 내장 middleware인 'urlencoded'로 데이터를 받을 수 있음
+    - 'req.body' 객체를 사용해 데이터를 받음
+    - 받은 데이터는 post router와 controller를 이용해 사용
 
 ---
 
-- **23-06-13 : #4.0 ~ #5.5 / (+ Quiz)**
-- **23-06-14 : #5.7 ~ #6.6 / (+ Code Challenge)**
 - **23-06-15 : #6.0 ~ #6.6 / (+ Code Challenge)**
 - **23-06-16 : #6.7 ~ #6.10 / (+ Code Challenge)**
 
@@ -97,6 +110,9 @@
    - View Engine 설정 및 경로 설정
    - partial, extends, block 등을 사용해 코드 재사용 가능
    - JavaScript 코드 사용 가능
+   - 조건문, 반복문 사용 가능
+   - mixin을 이용해 HTML을 return 해주는 일종의 function을 사용 가능
+6. DB
 
 ---
 

@@ -1,4 +1,9 @@
-extends base.pug
+extends base
+include mixins/video
 
 block content
-    h1 Welcome to WeTube!
+  h2 Welcome! Trending Videos!
+  each video in videos
+    +video(video)
+  else
+    li There is no values
