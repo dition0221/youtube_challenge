@@ -70,7 +70,7 @@
       - 'extends' 예약어를 사용해 base 파일을 사용
       - 'block'을 사용해 일부분 수정이 가능
 - **23-06-13 : #4.0 ~ #5.5 / (+ Quiz)**
-- **23-06-14 : #5.7 ~ #6.6 / (+ Code Challenge)**
+- **23-06-14 : #5.7 ~ #6.6 / Template(2) & POST (+ Code Challenge)**
   - Pug
     - element에서 변수 하나만 사용하는 경우(=variable)
     - 조건문(if/else), 반복문(each..in../while)
@@ -84,11 +84,21 @@
     - Express의 내장 middleware인 'urlencoded'로 데이터를 받을 수 있음
     - 'req.body' 객체를 사용해 데이터를 받음
     - 받은 데이터는 post router와 controller를 이용해 사용
+- **23-06-15 : #6.0 ~ #6.6 / (+ Code Challenge)**
+- **23-06-16 : #6.7 ~ #6.10 / Database (+ Code Challenge)**
+  - MongoDB : NoSQL DataBase
+  - mongoose : Node.js와 MongoDB를 서로 상호작용할 수 있게해주는 패키지
+    - MongoDB 연결 : mongoose.connect("MongoDB주소URL/TABLE명")
+    - DB logger 생성
+    - DB Model 및 Schema 작성
 
 ---
 
-- **23-06-15 : #6.0 ~ #6.6 / (+ Code Challenge)**
-- **23-06-16 : #6.7 ~ #6.10 / (+ Code Challenge)**
+- **23-06-19 : #6.11 ~ #6.28 / (+ Code Challenge(2 days)[1st day])**
+- **23-06-20 : #6.11 ~ #6.28 / (+ Code Challenge(2 days)[2nd day])**
+- **23-06-21 : #6.7 ~ #6.17 / (+ Quiz)**
+- **23-06-22 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[1st day])**
+- **23-06-23 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[2nd day])**
 
 ---
 
@@ -112,7 +122,15 @@
    - JavaScript 코드 사용 가능
    - 조건문, 반복문 사용 가능
    - mixin을 이용해 HTML을 return 해주는 일종의 function을 사용 가능
-6. DB
+6. POST 설정
+   - Front-End에서 method="POST"인 form 생성
+   - 데이터를 받기위해 Express의 내장 middleware인 'urlencoded' 설정
+   - POST method를 사용할 router와 controller 생성
+   - controller에서 'req.body' 객체를 사용해 데이터를 받음
+7. Database 설정
+   - MongoDB와 mongoose 설치
+   - server와 MongoDB 연결 및 연결로그 작성
+   - DB Model 작성
 
 ---
 

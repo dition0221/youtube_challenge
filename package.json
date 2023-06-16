@@ -17,6 +17,7 @@
   "homepage": "https://github.com/dition0221/youtube_challenge#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "mongoose": "^7.3.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {

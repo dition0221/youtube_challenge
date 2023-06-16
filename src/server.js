@@ -4,6 +4,9 @@ import morgan from "morgan"; // Middleware - Logger
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+// DB
+import "./db";
+import Video from "./models/Video"; // DB Model - Video
 
 // 서버의 port 번호
 const PORT = 4000;
