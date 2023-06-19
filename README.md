@@ -91,11 +91,22 @@
     - MongoDB 연결 : mongoose.connect("MongoDB주소URL/TABLE명")
     - DB logger 생성
     - DB Model 및 Schema 작성
+- **23-06-19 : #6.11 ~ #6.18 / DB find & create (+ Code Challenge(2 days)[1st day])**
+  - 파일 분할 정복 : server파일과 init파일(DB연결 및 App 실행) 분리
+  - DB 검색
+    1. 사용하고자 하는 DB model 파일을 import
+    2. '모델명.find()' 메서드를 사용해 DB에서 검색
+    - 비동기(async, await, try-catch)로 사용
+  - DB 업로드
+    - '모델명.create({스키마})'를 사용해 DB에 업로드 (document 생성 + DB 저장을 한 코드로 가능)
+      - document 생성 : const 변수명 = new 모델명({스키마})
+      - DB 저장 : await 변수명.save()
+  - 더 많은 model schema의 옵션들
+    - { required, default, trim, minLength, maxLength 등 }
 
 ---
 
-- **23-06-19 : #6.11 ~ #6.28 / (+ Code Challenge(2 days)[1st day])**
-- **23-06-20 : #6.11 ~ #6.28 / (+ Code Challenge(2 days)[2nd day])**
+- **23-06-20 : #6.20 ~ #6.28 / (+ Code Challenge(2 days)[2nd day])**
 - **23-06-21 : #6.7 ~ #6.17 / (+ Quiz)**
 - **23-06-22 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[1st day])**
 - **23-06-23 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[2nd day])**

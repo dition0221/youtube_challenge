@@ -4,12 +4,6 @@ import morgan from "morgan"; // Middleware - Logger
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
-// DB
-import "./db";
-import Video from "./models/Video"; // DB Model - Video
-
-// 서버의 port 번호
-const PORT = 4000;
 
 /* 서버(Express App) 생성 */
 const app = express();
@@ -29,7 +23,4 @@ app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
-/* 서버 실행 */
-app.listen(PORT, () =>
-  console.log(`✅ Server Connected: http://localhost:${PORT} 🚀`)
-);
+export default app;

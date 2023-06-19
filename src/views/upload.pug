@@ -1,7 +1,27 @@
 extends base
 
 block content
-  h4 Upload Video
+  if errorMessage
+    span= errorMessage
   form(method="POST")
-    input(name="title", type="text", placeholder="title", required)
+    input(
+      name="title",
+      type="text",
+      placeholder="Title",
+      required,
+      maxlength="80"
+    )
+    input(
+      name="description",
+      type="text",
+      placeholder="Description",
+      required,
+      minlength="20"
+    )
+    input(
+      name="hashtags",
+      type="text",
+      placeholder="Hashtags, separated by comma(,)",
+      required
+    )
     input(type="submit", value="Upload Video")
