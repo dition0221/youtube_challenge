@@ -103,10 +103,20 @@
       - DB 저장 : await 변수명.save()
   - 더 많은 model schema의 옵션들
     - { required, default, trim, minLength, maxLength 등 }
+- **23-06-20 : #6.19 ~ #6.28 / DB update & delete & middleware & static (+ Code Challenge(2 days)[2nd day])**
+  - 정규식, 404 page
+  - DB
+    - Update : 모델명.findOneAndUpdate({조건}, {업뎃내용}) 또는 모델명.findByIdAndUpdate(아이디, {업뎃내용})
+    - Exists : 모델명.exists({조건}) / '\_id'프로퍼티를 가지는 객체 또는 null
+    - middleware(mongoose) : 스키마명.pre("메서드명", 비동기콜백함수) / 'this' 예약어 사용 가능
+    - static : 모델의 메서드를 직접 만들 수 있음 / export, import 따로 필요없음 (모델자체를 export/import)
+      - 생성법 : 스키마명.static("만들메서드명", 만들콜백함수)
+      - 사용법 : 모델명.스태틱명(매개변수)
+    - Delete : 모델명.findOneAndDelete({조건}) 또는 모델명.findByIdAndDelete(아이디)
+    - 정렬 : .sort({프로퍼티명: "desc/asc"})
 
 ---
 
-- **23-06-20 : #6.20 ~ #6.28 / (+ Code Challenge(2 days)[2nd day])**
 - **23-06-21 : #6.7 ~ #6.17 / (+ Quiz)**
 - **23-06-22 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[1st day])**
 - **23-06-23 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[2nd day])**
@@ -142,6 +152,10 @@
    - MongoDB와 mongoose 설치
    - server와 MongoDB 연결 및 연결로그 작성
    - DB Model 작성
+8. Database 사용
+   - 더 많은 DB Model Schema 옵션 사용 (required, default 등)
+   - DB 검색 : 모델명.find()
+   - DB 저장 : 모델명.create()
 
 ---
 
