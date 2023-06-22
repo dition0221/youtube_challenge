@@ -115,7 +115,7 @@
     - Delete : 모델명.findOneAndDelete({조건}) 또는 모델명.findByIdAndDelete(아이디)
     - 정렬 : .sort({프로퍼티명: "desc/asc"})
 - **23-06-21 : #6.7 ~ #6.17 / (+ Quiz)**
-- **23-06-22 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[1st day])**
+- **23-06-22 : #7.0 ~ #7.3 / (+ Code Challenge(2 days)[1st day])**
 
 ---
 
