@@ -1,7 +1,7 @@
 // DB Models
 import Video from "../models/Video";
 
-/* Homepage - global router */
+/* Homepage - root router */
 export const home = async (req, res) => {
   const videos = await Video.find({}).sort({ createdAt: "desc" });
   return res.render("home", { pageTitle: "Home", videos });

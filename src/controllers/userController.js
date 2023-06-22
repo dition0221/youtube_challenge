@@ -1,7 +1,40 @@
-/* Join - global router */
-export const join = (req, res) => res.send("Join 🛫");
+// DB Models
+import User from "../models/User";
 
-/* Log In - global router */
+/* Join(GET) - root router */
+export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
+
+/* Join(POST) - root router */
+export const postJoin = async (req, res) => {
+  const { email, username, password, password2, name, location } = req.body;
+  const pageTitle = "Join";
+  // Check PW
+  if (password !== password2) {
+    return res.render("join", {
+      pageTitle,
+      errorMessage: "Password confirmation doesn't match.",
+    });
+  }
+  // Check unique
+  const exists = await User.exists({ $or: [{ username }, { email }] });
+  if (exists) {
+    return res.render("join", {
+      pageTitle,
+      errorMessage: "This username/email is already taken.",
+    });
+  }
+  // Save user to DB
+  await User.create({
+    email,
+    username,
+    password,
+    name,
+    location,
+  });
+  return res.redirect("/login");
+};
+
+/* Log In - root router */
 export const login = (req, res) => res.send("Log In 🔑");
 
 /* Log Out */

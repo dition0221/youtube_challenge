@@ -1,7 +1,8 @@
 // DB
 import "./db";
-// DB Model
+// DB Models
 import "./models/Video";
+import "./models/User";
 // Server
 import app from "./server";
 

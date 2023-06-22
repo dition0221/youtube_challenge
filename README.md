@@ -175,6 +175,14 @@
    - 더 많은 DB Model Schema 옵션 사용 (required, default 등)
    - DB 검색 : 모델명.find()
    - DB 저장 : 모델명.create()
+   - DB 업데이트 : 모델명.findOneAndUpdate() / 모델명.findByIdAndUpdate()
+   - DB 삭제 : 모델명.findOneAndDelete() / 모델명.findByIdAndDelete()
+   - DB 존재확인 : 모델명.exists()
+   - middleware : 스키마명.pre("메서드명", 비동기콜백함수) / 'this' 예약어 사용 가능
+   - static : 모델의 메서드를 직접 만들 수 있음 / export, import 따로 필요없음 (모델자체를 export/import)
+     - 생성법 : 스키마명.static("만들메서드명", 만들콜백함수)
+     - 사용법 : 모델명.스태틱명(매개변수)
+9. 사용자 인증 (User Authentication)
 
 ---
 
