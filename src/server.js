@@ -1,6 +1,6 @@
 import express from "express"; // Server
 import morgan from "morgan"; // Middleware - Logger
-// Router
+// Routers
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -18,7 +18,7 @@ app.set("views", process.cwd() + "/src/views"); // Path of 'views' folder
 // URL Encode - POST form
 app.use(express.urlencoded({ extended: true }));
 
-/* Router */
+/* Routers */
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
