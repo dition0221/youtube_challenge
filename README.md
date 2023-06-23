@@ -115,11 +115,25 @@
     - Delete : 모델명.findOneAndDelete({조건}) 또는 모델명.findByIdAndDelete(아이디)
     - 정렬 : .sort({프로퍼티명: "desc/asc"})
 - **23-06-21 : #6.7 ~ #6.17 / (+ Quiz)**
-- **23-06-22 : #7.0 ~ #7.3 / (+ Code Challenge(2 days)[1st day])**
+- **23-06-22 : #7.0 ~ #7.3 / User Authentication (+ Code Challenge(2 days)[1st day])**
+  - 회원가입(join) 페이지 생성
+    - DB Model / template / controller / router / 예외처리(중복 및 존재 체크)
+  - PW 보안 : 해시(Hash)
+    - 패키지 : 'bcrypt'
+      - 해싱 : await bcrypt.hash(해시할텍스트, SALT_ROUND)
+      - 비교 : await bcrypt.compare(비교할텍스트, 비교할해시텍스트)
+- **23-06-23 : #7.4 ~ #7.11 / User Authentication (+ Code Challenge(2 days)[2nd day])**
+  - 상태코드(Status Code) : res.status(CODE)
+  - 세션(session) : server와 client 간에 어떤 활동을 했는지 기억하는 것
+    - 패키지 : 'express-session'
+    - 세션 설정 : app.use(session({secret:"...", resave:true, saveUninitialized: true}))
+    - 최초로 Back-End가 browser에게 session id를 줌
+      - 사용자가 request를 보낼 때 마다, browser가 Back-End에게 쿠키에서 session id를 보냄
+      - Back-End는 session id를 통해 사용자를 개별적으로 파악할 수 있음
+    - 'req.session' 객체에서 참조 가능
+  - 'res.locals' 객체 : Express서버와 Pug템플릿에서 기본적으로 공유하는 전역변수
 
 ---
-
-- **23-06-23 : #7.0 ~ #7.11 / (+ Code Challenge(2 days)[2nd day])**
 
 - #7.12 ~ #7.23
 - **23-06-26 : #7.0 ~ #7.11 / (+ Quiz)**
@@ -142,36 +156,37 @@
 
 ---
 
-1. 프로젝트 준비 및 패키지 설치
+1. **프로젝트 준비 및 패키지 설치**
    - NodeJS 설치
    - package.json 생성 (npm init)
-   - 패키지 설치 { Express, babel, nodemon }
-2. 서버 생성 및 Route 설정
+   - _패키지 설치 { Express, babel, nodemon }_
+2. **서버 생성 및 Route 설정**
    - Express를 이용해 서버 생성 및 실행
    - Route 설정 (GET, req, res 등)
-3. 미들웨어 설정
-   - 패키지 설치 { Morgan }
+3. **미들웨어 설정**
+   - _패키지 설치 { Morgan }_
    - Morgan을 전역 Middleware로 설정
-4. Router 설정
+4. **Router 설정**
    - Router로 URL 그룹화 (global, videos, users)
    - Router와 Controller 분할 및 정복
    - URL Parameter 및 정규식 사용
-5. View Engine (Pug) 설정
+5. **View Engine (Pug) 설정**
+   - _패키지 설치 { Pug }_
    - View Engine 설정 및 경로 설정
    - partial, extends, block 등을 사용해 코드 재사용 가능
    - JavaScript 코드 사용 가능
    - 조건문, 반복문 사용 가능
    - mixin을 이용해 HTML을 return 해주는 일종의 function을 사용 가능
-6. POST 설정
+6. **POST 설정**
    - Front-End에서 method="POST"인 form 생성
    - 데이터를 받기위해 Express의 내장 middleware인 'urlencoded' 설정
    - POST method를 사용할 router와 controller 생성
    - controller에서 'req.body' 객체를 사용해 데이터를 받음
-7. Database 설정
-   - MongoDB와 mongoose 설치
+7. **Database 설정**
+   - _MongoDB와 mongoose 설치_
    - server와 MongoDB 연결 및 연결로그 작성
    - DB Model 작성
-8. Database 사용
+8. **Database 사용**
    - 더 많은 DB Model Schema 옵션 사용 (required, default 등)
    - DB 검색 : 모델명.find()
    - DB 저장 : 모델명.create()
@@ -182,7 +197,13 @@
    - static : 모델의 메서드를 직접 만들 수 있음 / export, import 따로 필요없음 (모델자체를 export/import)
      - 생성법 : 스키마명.static("만들메서드명", 만들콜백함수)
      - 사용법 : 모델명.스태틱명(매개변수)
-9. 사용자 인증 (User Authentication)
+9. **사용자 인증 (User Authentication)**
+   - _패키지 설치 { express-session, bcrypt }_
+   - 'User' DB 모델 생성 및 회원가입, 로그인 페이지 제작
+   - PW 보안: 해시함수 이용
+   - DB에 사용자 계정 저장
+   - 문제 발생 시 상태코드를 사용해 처리
+   - session을 이용해 개별적으로 사용자 구분 및 로그인 유지
 
 ---
 
