@@ -1,3 +1,4 @@
+import "dotenv/config"; // dotenv
 // DB
 import "./db";
 // DB Models

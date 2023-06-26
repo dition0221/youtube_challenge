@@ -1,3 +1,5 @@
-/node_modules
 /필기 요약지
 /.vscode
+
+/node_modules
+.env

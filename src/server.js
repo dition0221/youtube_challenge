@@ -1,6 +1,8 @@
 import express from "express"; // Server
-import morgan from "morgan"; // Middleware - Logger
-import session from "express-session"; // Middleware - Session
+// Middlewares
+import morgan from "morgan"; //  Logger
+import session from "express-session"; //  Session
+import MongoStore from "connect-mongo"; // Save session to MongoDB
 // Routers
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
@@ -22,9 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 // Session
 app.use(
   session({
-    secret: "Hello!",
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }), // DB
   })
 );
 // 'res.locals' object - with using session

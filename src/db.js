@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 /* Connect MongoDB */
-mongoose.connect("mongodb://127.0.0.1:27017/wetube");
+mongoose.connect(process.env.DB_URL);
 
 /* Log - Connection */
 const db = mongoose.connection;

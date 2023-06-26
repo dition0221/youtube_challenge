@@ -1,7 +1,9 @@
 // packages
 import bcrypt from "bcrypt";
+import fetch from "node-fetch";
 // DB Models
 import User from "../models/User";
+import { response } from "express";
 
 /* Join(GET) - root router */
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
@@ -69,6 +71,45 @@ export const postLogin = async (req, res) => {
   req.session.loggedIn = true;
   req.session.user = user;
   return res.redirect("/");
+};
+
+/* Github Login (Start) */
+export const startGithubLogin = (req, res) => {
+  const baseUrl = "https://github.com/login/oauth/authorize";
+  const config = {
+    client_id: process.env.GH_CLIENT_ID,
+    allow_signup: false,
+    scope: "read:user user:email",
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  return res.redirect(finalUrl);
+};
+
+/* Github Login (Finish) */
+export const finishGithubLogin = async (req, res) => {
+  const baseUrl = "https://github.com/login/oauth/access_token";
+  const config = {
+    client_id: process.env.GH_CLIENT_ID,
+    client_secret: process.env.GH_CLIENT_SECRET,
+    code: req.query.code,
+  };
+  const params = new URLSearchParams(config).toString();
+  const finalUrl = `${baseUrl}?${params}`;
+  // POST request
+  /*
+  const json = fetch(finalUrl, {
+    method: "POST",
+    headers: { Accept: "application/json" },
+  }).then((response) => response.json());
+  */
+  const data = await fetch(finalUrl, {
+    method: "POST",
+    headers: { Accept: "application/json" },
+  });
+  const json = await data.json();
+  console.log(json);
+  res.end();
 };
 
 /* Log Out */
