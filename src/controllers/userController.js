@@ -1,6 +1,6 @@
 // packages
 import bcrypt from "bcrypt";
-import fetch from "node-fetch";
+import fetch from "cross-fetch";
 // DB Models
 import User from "../models/User";
 import { response } from "express";
@@ -54,7 +54,7 @@ export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = "Log In";
   // Check username
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username, socialOnly: false });
   if (!user)
     return res.status(400).render("login", {
       pageTitle,
@@ -88,6 +88,7 @@ export const startGithubLogin = (req, res) => {
 
 /* Github Login (Finish) */
 export const finishGithubLogin = async (req, res) => {
+  // Config token
   const baseUrl = "https://github.com/login/oauth/access_token";
   const config = {
     client_id: process.env.GH_CLIENT_ID,
@@ -96,30 +97,70 @@ export const finishGithubLogin = async (req, res) => {
   };
   const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
-  // POST request
-  /*
-  const json = fetch(finalUrl, {
-    method: "POST",
-    headers: { Accept: "application/json" },
-  }).then((response) => response.json());
-  */
-  const data = await fetch(finalUrl, {
-    method: "POST",
-    headers: { Accept: "application/json" },
-  });
-  const json = await data.json();
-  console.log(json);
-  res.end();
+  // POST request - get 'access_token'
+  const tokenRequest = await (
+    await fetch(finalUrl, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+    })
+  ).json();
+  // Using API with 'access_token' to bring user info.
+  if ("access_token" in tokenRequest) {
+    const { access_token } = tokenRequest;
+    const apiUrl = "https://api.github.com";
+    const userData = await (
+      await fetch(`${apiUrl}/user`, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+    ).json();
+    const emailData = await (
+      await fetch(`${apiUrl}/user/emails`, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+    ).json();
+    const emailObj = emailData.find(
+      (email) => email.primary === true && email.verified === true
+    );
+    if (!emailObj) {
+      // Error: don't have email
+      // ! Set notification
+      return res.redirect("/login");
+    }
+    let user = await User.findOne({ email: emailObj.email });
+    // Success: if no account, Create new account
+    if (!user) {
+      user = await User.create({
+        email: emailObj.email,
+        username: userData.login,
+        password: userData.node_id,
+        name: userData.name ? userData.name : userData.login,
+        location: userData.location ? userData.location : "",
+        socialOnly: true,
+        avatarUrl: userData.avatar_url,
+      });
+    }
+    // Success: Log In
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
+  } else {
+    // Error: no 'access_token'
+    return res.redirect("/login");
+  }
 };
 
 /* Log Out */
-export const logout = (req, res) => res.send("Log Out");
+export const logout = (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+};
 
 /* See User */
 export const see = (req, res) => res.send("See User Profile");
 
 /* Edit User */
 export const edit = (req, res) => res.send("Edit User 😋");
-
-/* Delete User */
-export const deleteUser = (req, res) => res.send("Delete User 😭❌");

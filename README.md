@@ -4,7 +4,7 @@
 
 #### [23-06-05 ~ 23-07-17(6주)] 챌린지 교육 과정.
 
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/Pug-A86454?style=flat-square&logo=pug&logoColor=white"/> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white"/> <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white"/> <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white"/> <img src="https://img.shields.io/badge/Mongoose-880000?style=flat-square&logo=mongoose&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=white"/> <img src="https://img.shields.io/badge/Pug-A86454?style=flat-square&logo=pug&logoColor=white"/> <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white"/> <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white"/> <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white"/> <img src="https://img.shields.io/badge/Mongoose-880000?style=flat-square&logo=mongoose&logoColor=white"/> <img src="https://img.shields.io/badge/dotenv-ECD53F?style=flat-square&logo=dotenv&logoColor=white"/>
 
 ---
 
@@ -132,14 +132,15 @@
       - Back-End는 session id를 통해 사용자를 개별적으로 파악할 수 있음
     - 'req.session' 객체에서 참조 가능
   - 'res.locals' 객체 : Express서버와 Pug템플릿에서 기본적으로 공유하는 전역변수
-- **23-06-26 : #7.11 ~ #7.18 / (+ Quiz)**
-- **23-06-27 : #7.19 ~ #8.9 / (+ Code Challenge(2 days)[1st day])**
+- **23-06-26 : #7.11 ~ #7.18 / Login Part (+ Quiz)**
+- **23-06-27 : #7.19 ~ #7.23 / Social Login (+ Code Challenge(2 days)[1st day])**
 
 ---
 
-- **23-06-28 : #8.6 ~ #8.9 / (+ Code Challenge(2 days)[2nd day])**
+- **23-06-28 : #8.0 ~ #8.9 / (+ Code Challenge(2 days)[2nd day])**
 - #8.10 ~ #8.15
 - **23-06-29 : #9.0 ~ #9.7 / (+ Quiz)**
+
 - #10.0 ~ #10.3
 - **23-06-30 : #11.0 ~ #11.3 / (+ Code Challenge)**
 
