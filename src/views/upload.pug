@@ -3,7 +3,9 @@ extends base
 block content
   if errorMessage
     span= errorMessage
-  form(method="POST")
+  form(method="POST", enctype="multipart/form-data")
+    label(for="video") Video File
+    input#video(name="video", type="file", accept="video/*", required)
     input(
       name="title",
       type="text",

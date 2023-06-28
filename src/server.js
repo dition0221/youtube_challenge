@@ -27,7 +27,8 @@ app.use(
     secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_URL }), // DB
+    // Save session to DB
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
 // 'res.locals' object - with using session
@@ -37,5 +38,6 @@ app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
+app.use("/uploads", express.static("uploads")); // Show 'uploads' to browser
 
 export default app;

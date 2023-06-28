@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import fetch from "cross-fetch";
 // DB Models
 import User from "../models/User";
-import { response } from "express";
 
 /* Join(GET) - root router */
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
@@ -159,8 +158,91 @@ export const logout = (req, res) => {
   res.redirect("/");
 };
 
+/* Edit User (GET) */
+export const getEdit = (req, res) => {
+  return res.render("edit-profile", { pageTitle: "Edit Profile" });
+};
+
+/* Edit User (POST) */
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id, avatarUrl },
+    },
+    body: { name, email, username, location },
+    file,
+  } = req;
+  // Check duplication (email, username)
+  const findUsername = await User.findOne({ username });
+  const findEmail = await User.findOne({ email });
+  if (findUsername && _id !== findUsername._id.toString()) {
+    return res.render("edit-profile", {
+      pageTitle: "Edit Profile",
+      errorMessage: "Username already exists.",
+    });
+  }
+  if (findEmail && _id !== findEmail._id.toString()) {
+    return res.render("edit-profile", {
+      pageTitle: "Edit Profile",
+      errorMessage: "Email already exists.",
+    });
+  }
+  // Update DB
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      avatarUrl: file ? file.path : avatarUrl,
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  // Update Session
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit");
+};
+
+/* Change PW (GET) */
+export const getChangePassword = (req, res) => {
+  // if social account, don't render
+  if (req.session.user.socialOnly) {
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+
+/* Change PW (POST) */
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  // Check new PW
+  if (newPassword !== newPasswordConfirmation || !newPassword) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "New password confirmation doesn't match.",
+    });
+  }
+  // Check old PW
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
+  if (!ok) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The current password is incorrect.",
+    });
+  }
+  // Update PW to DB
+  user.password = newPassword;
+  await user.save();
+  // Go logout (No need to Update session)
+  return res.redirect("/users/logout"); // ! send notification
+};
+
 /* See User */
 export const see = (req, res) => res.send("See User Profile");
-
-/* Edit User */
-export const edit = (req, res) => res.send("Edit User 😋");

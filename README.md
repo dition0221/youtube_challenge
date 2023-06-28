@@ -126,21 +126,55 @@
   - 상태코드(Status Code) : res.status(CODE)
   - 세션(session) : server와 client 간에 어떤 활동을 했는지 기억하는 것
     - 패키지 : 'express-session'
-    - 세션 설정 : app.use(session({secret:"...", resave:true, saveUninitialized: true}))
+    - 세션 설정 : app.use(session({secret:"...", resave:false, saveUninitialized: false}))
     - 최초로 Back-End가 browser에게 session id를 줌
       - 사용자가 request를 보낼 때 마다, browser가 Back-End에게 쿠키에서 session id를 보냄
       - Back-End는 session id를 통해 사용자를 개별적으로 파악할 수 있음
     - 'req.session' 객체에서 참조 가능
   - 'res.locals' 객체 : Express서버와 Pug템플릿에서 기본적으로 공유하는 전역변수
 - **23-06-26 : #7.11 ~ #7.18 / Login Part (+ Quiz)**
+  - 세션을 DB에 저장
+    - 기본값으로 세션 데이터는 서버의 memory에 저장되므로, 비휘발성인 DB에 저장하도록 해야 함
+    - 패키지 : 'connect-mongo'
+      - 설정 : 세션 설정에서 'store: MongoStore.create({ mongoUrl: "몽고DB주소URL" })' 속성 추가
+  - 코드 보호
+    - 보안상의 이유로 공개되지 말아야 할 코드가 존재
+      - { session의 secret, DB주소, API key 등 }
+    - 환경변수 파일(.env)을 사용
+      - '.env' 파일 생성 및 값 추가 / '.gitignore' 등록
+      - 패키지: 'dotenv'
+        - 프로젝트 최상단 코드에 'import "dotenv/config";' 구문 작성
+        - 'process.env' 객체의 프로퍼티로 접근
+        - '.env'의 프로퍼티는 대문자로 작성
 - **23-06-27 : #7.19 ~ #7.23 / Social Login (+ Code Challenge(2 days)[1st day])**
+  - github 소셜 로그인
+    1. github에서 새로운 OAuth App 생성하기
+       - { Application name ,Homepage URL, Authentication callback URL }
+    2. 프로젝트의 Front-End에서 github 로그인을 위해 redirect 시키는 element 생성하기
+       - { client_id, allow_signup, scope 등 }
+    3. 'scope'를 사용해 private 데이터까지 가져오기
+       - 'URLSearchParams' 객체를 사용해 인코딩하면 더욱 간단함
+    4. 승인 후 callback되는 페이지 생성하기
+       - URL에 github에서 'code' 프로퍼티를 받음
+       - { client_id, client_secret, code } 매개변수들과 함께 POST방식으로 보냄
+       - token으로 바꿔줌
+    5. 'access_token'을 가지고 github API를 사용해 사용자 정보 가져오기
+       - 받은 token 객체에서 'access_token' 추출
+       - 'access_token'을 가지고 사용자 정보, 이메일 정보 등을 가져옴
+    6. 로그인 규칙 만들기
+    - 일반 회원가입과 소셜 회원가입의 계정이 중복될 수 있는 문제 발생
+      - 여러 방법의 규칙이 존재함
+      - 소셜 회원가입 시 소셜 로그인만 가능하도록 채택할 예정
+        - userSchema에서 'socialOnly' 속성을 추가해 소셜 여부 판별
+  - 로그아웃 페이지
+    - 세션을 파괴시킨 후, 홈페이지로 redirect
+      - req.session.destroy()
+- **23-06-28 : #8.0 ~ #8.9 / Edit Profile & Upload File (+ Code Challenge(2 days)[2nd day])**
 
 ---
 
-- **23-06-28 : #8.0 ~ #8.9 / (+ Code Challenge(2 days)[2nd day])**
 - #8.10 ~ #8.15
 - **23-06-29 : #9.0 ~ #9.7 / (+ Quiz)**
-
 - #10.0 ~ #10.3
 - **23-06-30 : #11.0 ~ #11.3 / (+ Code Challenge)**
 
@@ -197,7 +231,7 @@
      - 생성법 : 스키마명.static("만들메서드명", 만들콜백함수)
      - 사용법 : 모델명.스태틱명(매개변수)
 9. **사용자 인증 (User Authentication)**
-   - _패키지 설치 { express-session, bcrypt }_
+   - _패키지 설치 { bcrypt, express-session, connect-mongo }_
    - 'User' DB 모델 생성 및 회원가입, 로그인 페이지 제작
    - PW 보안: 해시함수 이용
    - DB에 사용자 계정 저장
