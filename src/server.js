@@ -34,10 +34,13 @@ app.use(
 // 'res.locals' object - with using session
 app.use(localsMiddleware);
 
+/* Allow showing files */
+app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("assets"));
+
 /* Routers */
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
-app.use("/uploads", express.static("uploads")); // Show 'uploads' to browser
 
 export default app;

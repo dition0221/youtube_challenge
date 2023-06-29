@@ -9,11 +9,14 @@ const userSchema = new mongoose.Schema({
   location: { type: String, trim: true },
   socialOnly: { type: Boolean, default: false },
   avatarUrl: { type: String },
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
 });
 
-// Middleware - PW Hashing
+/* Middleware: PW Hashing */
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 5);
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 5);
+  }
 });
 
 const User = mongoose.model("User", userSchema);

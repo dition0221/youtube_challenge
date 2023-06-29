@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import fetch from "cross-fetch";
 // DB Models
 import User from "../models/User";
+import Video from "../models/Video";
 
 /* Join(GET) - root router */
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
@@ -244,5 +245,16 @@ export const postChangePassword = async (req, res) => {
   return res.redirect("/users/logout"); // ! send notification
 };
 
-/* See User */
-export const see = (req, res) => res.send("See User Profile");
+/* See User Profile */
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).populate("videos");
+  if (!user) {
+    return res.status(404).render("404", { pageTitle: "User not found." });
+  }
+  return res.render("users/profile", {
+    pageTitle: user.name,
+    user,
+    videos: user.videos,
+  });
+};

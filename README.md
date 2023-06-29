@@ -170,13 +170,27 @@
     - 세션을 파괴시킨 후, 홈페이지로 redirect
       - req.session.destroy()
 - **23-06-28 : #8.0 ~ #8.9 / Edit Profile & Upload File (+ Code Challenge(2 days)[2nd day])**
+  - Edit profile 페이지, Change PW 페이지
+    - DB 및 session 업데이트
+  - 로그인/비로그인 상태에 따라 열람할 수 있는 페이지 설정
+    - middleware와 req.session을 사용
+  - file upload
+    - 패키지 : 'multer'
+      - from(enctype="multipart/form-data")
+      - Middleware : export const MIDDLEWARE = multer({CONFIG})
+      - uploads 폴더 : 자동으로 생성됨, .gitignore에 추가
+      - route에 생성한 middleware 적용 : MIDDLEWARE.single("FILE")
+        - FILE명은 form의 input의 name속성값과 같아야 함
+      - 'req.file' 객체를 통해 DB 업데이트 (파일 업로드 x / 파일 경로 업로드 o)
+      - Front-End에 표현
+        - 'express.static("FOLDER")'를 사용해 폴더 노출 시키기
+          - ex. app.use("/uploads", express.static("uploads"));
+        - 'req.session'에 값을 저장해서 사용
+- **23-06-29 : #8.10 ~ #8.15 + #9.0 ~ #9.7 / (+ Quiz)**
 
 ---
 
-- #8.10 ~ #8.15
-- **23-06-29 : #9.0 ~ #9.7 / (+ Quiz)**
-- #10.0 ~ #10.3
-- **23-06-30 : #11.0 ~ #11.3 / (+ Code Challenge)**
+- **23-06-30 : #10.0 ~ #10.3 + #11.0 ~ #11.3 / (+ Code Challenge)**
 
 - **23-07-03 : #11.4 ~ #11.11 / (+ Code Challenge(2 days)[1st day])**
 - **23-07-04 : #11.4 ~ #11.11 / (+ Code Challenge(2 days)[2nd day])**
