@@ -186,14 +186,36 @@
         - 'express.static("FOLDER")'를 사용해 폴더 노출 시키기
           - ex. app.use("/uploads", express.static("uploads"));
         - 'req.session'에 값을 저장해서 사용
-- **23-06-29 : #8.10 ~ #8.15 + #9.0 ~ #9.7 / (+ Quiz)**
+- **23-06-29 : #8.10 ~ #8.15 + #9.0 ~ #9.7 / DB Model Relationship & Webpack (+ Quiz)**
+  - profile 페이지 생성
+  - DB Model을 서로 연결하기 (relationship)
+    - 'id' 속성값을 이용해 연결 : Model Schema에서 속성 추가
+      - type: mongoose.Schema.Types.ObjectId / mongoose의 ObjectID 타입
+      - ref : MODEL / 어느 모델을 참조할 것인지
+  - 연결된 DB Model 사용하기
+    - '.populate("파라미터명")' : 연결된 model의 정보를 가져올 수 있음
+    - 'ref' 속성값을 참조해 해당 model에서 가져옴
+  - '.isModified("파라미터명")' : 해당 model schema 타입이 변경되었는지 Boolean값으로 반환
+  - 영상의 주인만 video를 edit/delete 할 수 있도록 수정
+  - Webpack : input으로 주는 파일들(ex. ES6.js, .scss)을 압축 및 변환해서 output 파일(ex. normal.js, .css)로 변환해주는 프레임워크
+    - 패키지 : {webpack, webpack-cli, babel/core, babel/preset-env, babel-loader, sass-loader, css-loader, MiniCssExtractPlugin 등}
+    - 설정파일 : webpack.config.js
+    - script 설정 : '"assets": "webpack"'
+    - 'path.resolve()' : 파일 경로를 만들어주는 메서드 (import path 필요)
+    - 생성된 파일을 사용하기위해 'express.static()' 메서드를 사용해 middleware설정
+      - app.use("/static", express.static("assets"));
+    - webpack에 'clean: true' 속성을 추가해 자동으로 이전 output삭제 후 output
+    - webpack에 'watch: true' 속성을 추가해 자동 재시작 기능 사용
+      - Back-End script와 Webpack script를 동시에 사용해야 함
+      - 'nodemon.json' nodemon 설정파일을 만들어, Back-End script에서는 webpack관련 파일들을 무시하도록 설정
+  - SCSS
+- **23-06-30 : #11.0 ~ #11.3 / Video Player(1) (+ Code Challenge)**
 
 ---
 
-- **23-06-30 : #10.0 ~ #10.3 + #11.0 ~ #11.3 / (+ Code Challenge)**
-
-- **23-07-03 : #11.4 ~ #11.11 / (+ Code Challenge(2 days)[1st day])**
-- **23-07-04 : #11.4 ~ #11.11 / (+ Code Challenge(2 days)[2nd day])**
+- #10.0 ~ #10.3
+- **23-07-03 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[1st day])**
+- **23-07-04 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[2nd day])**
 - #12.0 ~ #12.2
 - **23-07-05 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[1st day])**
 - **23-07-06 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[2nd day])**
