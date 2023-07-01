@@ -210,10 +210,10 @@
       - 'nodemon.json' nodemon 설정파일을 만들어, Back-End script에서는 webpack관련 파일들을 무시하도록 설정
   - SCSS
 - **23-06-30 : #11.0 ~ #11.3 / Video Player(1) (+ Code Challenge)**
+- **23-07-01 : #10.0 ~ #10.3 / CSS styling**
 
 ---
 
-- #10.0 ~ #10.3
 - **23-07-03 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[1st day])**
 - **23-07-04 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[2nd day])**
 - #12.0 ~ #12.2

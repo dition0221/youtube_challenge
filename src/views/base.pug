@@ -3,33 +3,15 @@ html(lang="ko")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="https://unpkg.com/mvp.css@1.12/mvp.css")
     link(rel="stylesheet", href="/static/css/styles.css")
     title #{ pageTitle } | #{ siteName }
   body
-    header
-      h1= pageTitle
-      nav
-        ul
-          li
-            a(href="/") Home
-          li
-            a(href="/search") Search
-          if loggedIn
-            li
-              a(href="/videos/upload") Upload Video
-            li
-              a(href=`/users/${loggedInUser._id}`) #{ loggedInUser.name }의 profile
-            li
-              a(href="/users/edit") Edit Profile
-            li
-              a(href="/users/logout") Log Out
-          else
-            li
-              a(href="/join") Join
-            li
-              a(href="/login") Log In
+    include partials/header.pug
     main
       block content
     include partials/footer.pug
-  block scripts
+    script(
+      src="https://kit.fontawesome.com/a3fb1d4580.js",
+      crossorigin="anonymous"
+    )
+    block scripts
