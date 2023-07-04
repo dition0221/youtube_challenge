@@ -1,14 +1,25 @@
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
 const muteBtn = document.getElementById("mute");
-const time = document.getElementById("time");
 const volumeRange = document.getElementById("volume");
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
+const timeline = document.getElementById("timeline");
+const fullScreenBtn = document.getElementById("fullScreen");
+const videoContainer = document.getElementById("videoContainer");
+const videoControls = document.getElementById("videoControls");
 
-/* Global parameter */
-let volumeValue = 0.5;
+// Time Format
+const formatTime = (seconds) =>
+  new Date(seconds * 1000).toISOString().substring(14, 19);
+
+/* Global parameter & Initial Settings */
+let volumeValue = 0.5; // Initial Volume
 video.volume = volumeValue;
+let controlsTimeout = null; // Initial Controls's SetTimeout ID
+let controlsMovementTimeout = null;
 
-/* Paly button */
+/* Play Button */
 playBtn.addEventListener("click", () => {
   if (video.paused) {
     video.play();
@@ -50,4 +61,63 @@ volumeRange.addEventListener("change", (event) => {
   if (Number(value) !== 0) {
     volumeValue = value;
   }
+});
+
+/* Total Time */
+const handleMetadata = () => {
+  totalTime.innerText = formatTime(Math.floor(video.duration));
+  timeline.max = Math.floor(video.duration); // get maximum timeline
+};
+// 새로고침해도 loadedmetadata가 실행되지 않는 문제 해결
+video.readyState
+  ? handleMetadata()
+  : video.addEventListener("loadedmetadata", handleMetadata);
+
+/* Current Time */
+video.addEventListener("timeupdate", () => {
+  currentTime.innerText = formatTime(Math.floor(video.currentTime));
+  timeline.value = Math.floor(video.currentTime); // get current timeline
+});
+
+/* Time Line */
+timeline.addEventListener("input", (event) => {
+  const {
+    target: { value },
+  } = event;
+  video.currentTime = value;
+});
+
+/* Full Screen */
+fullScreenBtn.addEventListener("click", () => {
+  const isFullscreen = document.fullscreenElement;
+  if (isFullscreen) {
+    document.exitFullscreen();
+  } else {
+    videoContainer.requestFullscreen();
+  }
+});
+document.addEventListener("fullscreenchange", () => {
+  fullScreenBtn.innerText = document.fullscreenElement
+    ? "Exit Full Screen"
+    : "Enter Full Screen";
+});
+
+/* Show video controls */
+const hideControls = () => videoControls.classList.remove("showing");
+// Appear
+video.addEventListener("mousemove", () => {
+  if (controlsTimeout) {
+    clearTimeout(controlsTimeout);
+    controlsTimeout = null;
+  }
+  if (controlsMovementTimeout) {
+    clearTimeout(controlsMovementTimeout);
+    controlsMovementTimeout = null;
+  }
+  videoControls.classList.add("showing");
+  controlsMovementTimeout = setTimeout(hideControls, 3000);
+});
+// Disappear
+video.addEventListener("mouseleave", () => {
+  controlsTimeout = setTimeout(hideControls, 3000);
 });

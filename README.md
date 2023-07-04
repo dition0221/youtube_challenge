@@ -210,12 +210,19 @@
       - 'nodemon.json' nodemon 설정파일을 만들어, Back-End script에서는 webpack관련 파일들을 무시하도록 설정
   - SCSS
 - **23-06-30 : #11.0 ~ #11.3 / Video Player(1) (+ Code Challenge)**
-- **23-07-01 : #10.0 ~ #10.3 / CSS styling**
+  - Webpack에서 여러 개의 파일을 한꺼번에 변환시키는 방법
+    - 'entry' (input)속성값을 객체로 사용해 여러 개의 파일들을 입력
+    - 각각 다른 파일로 compile되도록 'output'의 'filename' 속성값 변경
+      - '[name]' : 'entry'속성 내의 각각의 파라미터명으로 사용
+  - video player를 직접 만들기
+    1. Pug에서 필요한 HTML element 생성
+    2. JavaScript에서 기능 생성
+    - 재생버튼, 음소거버튼, 볼륨조절바 등
+- **23-07-04 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[2nd day])**
 
 ---
 
-- **23-07-03 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[1st day])**
-- **23-07-04 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[2nd day])**
+- #10.0 ~ #10.3
 - #12.0 ~ #12.2
 - **23-07-05 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[1st day])**
 - **23-07-06 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[2nd day])**
