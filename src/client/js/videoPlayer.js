@@ -9,14 +9,16 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
-// Time Format
+// Time Format f.
 const formatTime = (seconds) =>
   new Date(seconds * 1000).toISOString().substring(14, 19);
 
 /* Global parameter & Initial Settings */
-let volumeValue = 0.5; // Initial Volume
+// Initial Volume
+let volumeValue = 0.5;
 video.volume = volumeValue;
-let controlsTimeout = null; // Initial Controls's SetTimeout ID
+// Initial Controls's SetTimeout ID
+let controlsTimeout = null;
 let controlsMovementTimeout = null;
 
 /* Play Button */
@@ -27,6 +29,9 @@ playBtn.addEventListener("click", () => {
     video.pause();
   }
   playBtn.innerText = video.paused ? "Play" : "Pause";
+});
+video.addEventListener("ended", () => {
+  playBtn.innerText = "Play";
 });
 
 /* Mute Button */
@@ -120,4 +125,10 @@ video.addEventListener("mousemove", () => {
 // Disappear
 video.addEventListener("mouseleave", () => {
   controlsTimeout = setTimeout(hideControls, 3000);
+});
+
+/* Register Video's View */
+video.addEventListener("ended", async () => {
+  const { id } = videoContainer.dataset;
+  await fetch(`/api/videos/${id}/view`, { method: "POST" });
 });

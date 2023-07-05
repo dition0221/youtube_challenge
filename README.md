@@ -219,11 +219,13 @@
     2. JavaScript에서 기능 생성
     - 재생버튼, 음소거버튼, 볼륨조절바 등
 - **23-07-04 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[2nd day])**
+  - video player를 직접 만들기
+    - { timeline, full screen, video control, }
+- **23-07-05 : #10.0 ~ #10.1 + #12.0 ~ #12.2 / SCSS(1) & Register view using API (+ Code Challenge(2 days)[1st day])**
+  - 10-2 / 5:20
 
 ---
 
-- #10.0 ~ #10.3
-- #12.0 ~ #12.2
 - **23-07-05 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[1st day])**
 - **23-07-06 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[2nd day])**
 - **23-07-07 : #14.0 / (+ Quiz)**

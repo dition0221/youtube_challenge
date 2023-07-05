@@ -3,11 +3,12 @@ import express from "express"; // Server
 import morgan from "morgan"; //  Logger
 import session from "express-session"; //  Session
 import MongoStore from "connect-mongo"; // Save session to MongoDB
+import { localsMiddleware } from "./middlewares";
 // Routers
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
-import { localsMiddleware } from "./middlewares";
+import apiRouter from "./routers/apiRouter";
 
 /* 서버(Express App) 생성 */
 const app = express();
@@ -42,5 +43,6 @@ app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
+app.use("/api", apiRouter);
 
 export default app;
