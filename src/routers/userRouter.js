@@ -15,10 +15,9 @@ import {
   avatarUpload,
 } from "../middlewares";
 
-/* Router */
 const userRouter = express.Router();
 
-/* controller */
+/* Routes */
 userRouter
   .route("/edit")
   .all(protectorMiddleware)

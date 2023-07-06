@@ -8,10 +8,9 @@ import {
 } from "../controllers/userController";
 import { publicOnlyMiddleware } from "../middlewares";
 
-/* Router */
 const rootRouter = express.Router();
 
-/* controller */
+/* Routes */
 rootRouter.get("/", home);
 rootRouter.route("/join").all(publicOnlyMiddleware).get(getJoin).post(postJoin);
 rootRouter

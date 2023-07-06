@@ -222,12 +222,18 @@
   - video player를 직접 만들기
     - { timeline, full screen, video control, }
 - **23-07-05 : #10.0 ~ #10.1 + #12.0 ~ #12.2 / SCSS(1) & Register view using API (+ Code Challenge(2 days)[1st day])**
-  - 10-2 / 5:20
+  - video 조회수 기록 : API views
+    - Back-End에서 template를 rendering하지 않고, Front-End와 통신
+      1. Router 생성
+      2. Controller 생성 : 'form'을 이용하지않는 POST method
+      3. Front에서 URL 이동 없이 통신
+         - Front의 JavaScript에서 'fetch()'를 사용해 URL 호출 : Front -> Back
+         - Back에서 'res.sendStatus()'를 사용해 응답 종료 : Back -> Front
+- **23-07-06 : #13.0 ~ #13.5 / Video recorder (+ Code Challenge(2 days)[2nd day])**
 
 ---
 
-- **23-07-05 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[1st day])**
-- **23-07-06 : #13.0 ~ #13.5 / (+ Code Challenge(2 days)[2nd day])**
+- 10-2 / 5:20
 - **23-07-07 : #14.0 / (+ Quiz)**
 
 - #14.1 ~ #14.6 / #15.0 ~ #15.1 / #16.0 ~ #16.9 / #17.0 ~ #17.10

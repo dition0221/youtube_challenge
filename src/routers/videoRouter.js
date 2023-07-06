@@ -9,10 +9,9 @@ import {
 } from "../controllers/videoController";
 import { protectorMiddleware, videoUpload } from "../middlewares";
 
-/* Router */
 const videoRouter = express.Router();
 
-/* Controller */
+/* Routes */
 videoRouter
   .route("/upload")
   .all(protectorMiddleware)
