@@ -221,7 +221,7 @@
 - **23-07-04 : #11.4 ~ #11.11 / Video Player(2) (+ Code Challenge(2 days)[2nd day])**
   - video player를 직접 만들기
     - { timeline, full screen, video control, }
-- **23-07-05 : #10.0 ~ #10.1 + #12.0 ~ #12.2 / SCSS(1) & Register view using API (+ Code Challenge(2 days)[1st day])**
+- **23-07-05 : #12.0 ~ #12.2 & #10.0 ~ #10.1 / Register view using API & SCSS(1) (+ Code Challenge(2 days)[1st day])**
   - video 조회수 기록 : API views
     - Back-End에서 template를 rendering하지 않고, Front-End와 통신
       1. Router 생성
@@ -230,12 +230,25 @@
          - Front의 JavaScript에서 'fetch()'를 사용해 URL 호출 : Front -> Back
          - Back에서 'res.sendStatus()'를 사용해 응답 종료 : Back -> Front
 - **23-07-06 : #13.0 ~ #13.5 / Video recorder (+ Code Challenge(2 days)[2nd day])**
+  - video 녹화하기
+    - 사용자의 media device 권한 받기
+      - 'navigator.mediaDevices.getUserMedia({조건})' : 미디어 데이터의 'stream'을 반환 / 비동기
+    - 실시간으로 video 화면 띄우기
+      - 생성한 'stream'을 'video.srcObject'의 값으로 넣기
+    - video 녹화하기
+      - 'new MediaRecorder(스트림[, 옵션])'을 이용해 녹화할 대상 선정
+      - '.start()/.stop()' 메서드를 통해 녹화 시작/종료
+      - 녹화 종료 시 자동으로 recorder의 'dataavailable' Event 발생
+      - 'event.data'에 녹화파일이 브라우저의 메모리에 저장됨
+      - 'URL.createObjectURL()'함수를 이용해 event.data를 가리키는 URL을 생성 및 활용 가능
+    - 녹화한 video를 download하기
+      - HTML 'a'태그를 만든 후, HTML에 붙인 후, click하게 함 {document.createElement(), document.body.appendChild(), .click()}
+      - 'a'태그의 'download'속성이 존재할 시 'href'속성값을 'download'속성값의 이름으로 file을 다운로드 함
+- **23-07-07 : #14.0 ~ #14.4 / Video format & Thumbnail (+ Quiz)**
 
 ---
 
 - 10-2 / 5:20
-- **23-07-07 : #14.0 / (+ Quiz)**
-
 - #14.1 ~ #14.6 / #15.0 ~ #15.1 / #16.0 ~ #16.9 / #17.0 ~ #17.10
 
 ---

@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/dition0221/youtube_challenge#readme",
   "dependencies": {
+    "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.6",
     "bcrypt": "^5.1.0",
     "connect-mongo": "^5.0.0",
     "cross-fetch": "^3.1.6",

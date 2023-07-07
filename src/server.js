@@ -34,6 +34,12 @@ app.use(
 );
 // 'res.locals' object - with using session
 app.use(localsMiddleware);
+// FFmpeg: SharedArrayBuffer
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  next();
+});
 
 /* Allow showing files */
 app.use("/uploads", express.static("uploads"));
