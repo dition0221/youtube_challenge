@@ -37,6 +37,7 @@ export const getEdit = async (req, res) => {
     user: { _id },
   } = req.session;
   if (String(video.owner) !== String(_id)) {
+    req.flash("error", "It's not your video.");
     return res.status(403).redirect("/");
   }
   // Success
@@ -57,13 +58,14 @@ export const postEdit = async (req, res) => {
   if (String(video.owner) !== String(_id)) {
     return res.status(403).redirect("/");
   }
-  // Update video to DB
+  // Success: Update video to DB
   const { title, description, hashtags } = req.body;
   await Video.findByIdAndUpdate(id, {
     title,
     description,
     hashtags: Video.formatHashtags(hashtags),
   });
+  req.flash("success", "Changes saved.");
   return res.redirect(`/videos/${id}`);
 };
 
@@ -77,12 +79,13 @@ export const postUpload = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const { path: fileUrl } = req.file;
+  const { video, thumb } = req.files;
   const { title, description, hashtags } = req.body;
   // Save to DB
   try {
     const newVideo = await Video.create({
-      fileUrl,
+      fileUrl: video[0].path.replace(/\\\\/g, "/"),
+      thumbUrl: thumb[0].path.replace(/\\\\/g, "/"),
       title,
       description,
       hashtags: Video.formatHashtags(hashtags),

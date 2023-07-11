@@ -245,11 +245,23 @@
       - HTML 'a'태그를 만든 후, HTML에 붙인 후, click하게 함 {document.createElement(), document.body.appendChild(), .click()}
       - 'a'태그의 'download'속성이 존재할 시 'href'속성값을 'download'속성값의 이름으로 file을 다운로드 함
 - **23-07-07 : #14.0 ~ #14.4 / Video format & Thumbnail (+ Quiz)**
+  - 동영상 포맷
+    - 패키지 : ffmpeg.wasm
+      - 동영상을 변환하기 위해 사용자의 컴퓨터(브라우저)를 사용 (서버 사용 x)
+      - ffmpeg : audio와 video를 기록, 변환 및 스트리밍 하는 프레임워크
+      - WebAssembly(WASM) : Front-End에서 다른 언어들(non-JS)을 실행 가능
+    - 사용법
+      1. import 및 ffmpeg의 instance 생성
+      2. 사용자의 컴퓨터에 ffmpeg를 load
+      3. 파일 생성 >> video 포맷 / 썸네일 추출 >> Back-End로 파일 가져오기
+      4. Back-End에서 파일(.buffer)을 Blob 데이터로 변경 >> URL 데이터로 변경 >> 사용
+      5. 사용자의 컴퓨터에 ffmpeg unlink 및 Back-End에 URL 데이터 삭제
+- **23-07-11 : #14.5 ~ #14.6 + #15.0 ~ #15.1 / Thumbnail upload & Flash message**
 
 ---
 
 - 10-2 / 5:20
-- #14.1 ~ #14.6 / #15.0 ~ #15.1 / #16.0 ~ #16.9 / #17.0 ~ #17.10
+- #16.0 ~ #16.9 [10] / #17.0 ~ #17.10 [11]
 
 ---
 

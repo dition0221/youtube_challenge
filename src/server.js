@@ -3,6 +3,7 @@ import express from "express"; // Server
 import morgan from "morgan"; //  Logger
 import session from "express-session"; //  Session
 import MongoStore from "connect-mongo"; // Save session to MongoDB
+import flash from "express-flash"; // Send message to user
 import { localsMiddleware } from "./middlewares";
 // Routers
 import rootRouter from "./routers/rootRouter";
@@ -34,16 +35,19 @@ app.use(
 );
 // 'res.locals' object - with using session
 app.use(localsMiddleware);
-// FFmpeg: SharedArrayBuffer
+// FFmpeg: SharedArrayBuffer setting
 app.use((req, res, next) => {
   res.header("Cross-Origin-Opener-Policy", "same-origin");
   res.header("Cross-Origin-Embedder-Policy", "require-corp");
   next();
 });
+// express-flash: Flash message
+app.use(flash());
 
 /* Allow showing files */
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
+app.use("/img", express.static("src/img")); // footer logo
 
 /* Routers */
 app.use("/", rootRouter);

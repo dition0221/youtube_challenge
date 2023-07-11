@@ -9,7 +9,7 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
-// Time Format f.
+// f: Time Format
 const formatTime = (seconds) =>
   new Date(seconds * 1000).toISOString().substring(14, 19);
 
@@ -127,8 +127,32 @@ video.addEventListener("mouseleave", () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 });
 
-/* Register Video's View */
+/* 조회수: Register video's view */
 video.addEventListener("ended", async () => {
   const { id } = videoContainer.dataset;
   await fetch(`/api/videos/${id}/view`, { method: "POST" });
 });
+
+/* Keyboard shortcut */
+document.addEventListener("keyup", (event) => {
+  // [F] fullscreen
+  if (event.code === "KeyF") {
+    fullScreenBtn.click();
+  }
+  // [Space] play/Stop
+  if (event.code === "Space") {
+    playBtn.click();
+  }
+  // [M] Mute/Unmute
+  if (event.code === "KeyM") {
+    muteBtn.click();
+  }
+});
+
+/* Video shortcut: Click to play/pause */
+video.addEventListener("click", () => {
+  playBtn.click();
+});
+
+// Execute init
+playBtn.click();

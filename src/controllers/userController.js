@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import fetch from "cross-fetch";
 // DB Models
 import User from "../models/User";
-import Video from "../models/Video";
 
 /* Join(GET) - root router */
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
@@ -209,6 +208,7 @@ export const postEdit = async (req, res) => {
 export const getChangePassword = (req, res) => {
   // if social account, don't render
   if (req.session.user.socialOnly) {
+    req.flash("error", "Can't change password");
     return res.redirect("/");
   }
   return res.render("users/change-password", { pageTitle: "Change Password" });
@@ -238,11 +238,11 @@ export const postChangePassword = async (req, res) => {
       errorMessage: "The current password is incorrect.",
     });
   }
-  // Update PW to DB
+  // Success
   user.password = newPassword;
   await user.save();
-  // Go logout (No need to Update session)
-  return res.redirect("/users/logout"); // ! send notification
+  req.flash("info", "Password updated");
+  return res.redirect("/users/logout"); // Go logout (No need to Update session)
 };
 
 /* See User Profile */
