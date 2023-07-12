@@ -257,6 +257,24 @@
       4. Back-End에서 파일(.buffer)을 Blob 데이터로 변경 >> URL 데이터로 변경 >> 사용
       5. 사용자의 컴퓨터에 ffmpeg unlink 및 Back-End에 URL 데이터 삭제
 - **23-07-11 : #14.5 ~ #14.6 + #15.0 ~ #15.1 / Thumbnail upload & Flash message**
+  - flash message: 서버에서 사용자에게 메세지 전송
+    - 패키지 : express-flash
+      - 사용자를 위해 template에 메시지를 남길 수 있게 해주는 Middleware
+      - 이 메시지는 session에 근거하기 때문에 한 사용자만이 볼 수 있음
+      - 일회성 메시지 : 메시지는 template에서 딱 1번만 보여줌
+        - 메시지가 보여진 후 Express가 메시지를 cache에서 지워버리기 때문
+      - 설정법 : 서버파일에서 import 후 전역 Middleware로 설정
+        - 'app.use(flash());'
+        - session Middleware 보다 아래에 코드가 위치해야 함 (session을 사용하기 때문)
+      - 사용법
+        1. Controller(또는 Middleware)에서 'req.flash()' 함수를 사용하기
+        - 기본형 : req.flash(메시지타입, 내용);
+          - 메시지타입: 원하는대로 설정 가능
+        2. Template에서 메시지를 보여주기
+        - 'express-flash' 패키지는 자동으로 'res.locals'에 'messages'객체를 생성함
+          - Template에서 'messages.메시지타입'으로 사용
+- **23-07-12 : #16.0 ~ #16.2**
+  - 16.3 3:33
 
 ---
 

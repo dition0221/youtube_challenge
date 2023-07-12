@@ -15,17 +15,22 @@ block content
         input#timeline(type="range", min="0", step="1", value="0")
       div
         button#fullScreen Enter Full Screen
-
-  //- div
-  //-   p= video.description
-  //-   small= video.createdAt
-  //- div
-  //-   small Uploaded by &nbsp;
-  //-     a(href=`/users/${video.owner._id}`) @#{ video.owner.name }
-  //- if String(video.owner._id) === String(loggedInUser._id)
-  //-   a(href=`${video.id}/edit`) Edit Video &rarr;
-  //-   br
-  //-   a(href=`${video.id}/delete`) Delete Video &rarr;
+  .video__data
+    p= video.description
+    small= video.createdAt
+  div
+    small Uploaded by &nbsp;
+      a(href=`/users/${video.owner._id}`) @#{ video.owner.name }
+  if String(video.owner._id) === String(loggedInUser._id)
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+    br
+    a(href=`${video.id}/delete`) Delete Video &rarr;
+  if loggedIn
+    .video__comments
+      form#commentForm.video__comment-form
+        textarea(cols="30", rows="10", placeholder="write comment..")
+        button Add Comment
 
 block scripts
   script(src="/static/js/videoPlayer.js")
+  script(src="/static/js/commentSection.js")

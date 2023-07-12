@@ -4,6 +4,7 @@ import "./db";
 // DB Models
 import "./models/Video";
 import "./models/User";
+import "./models/Comment";
 // Server
 import app from "./server";
 

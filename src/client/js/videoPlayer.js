@@ -153,6 +153,3 @@ document.addEventListener("keyup", (event) => {
 video.addEventListener("click", () => {
   playBtn.click();
 });
-
-// Execute init
-playBtn.click();
