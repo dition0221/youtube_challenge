@@ -69,6 +69,7 @@ export const postLogin = async (req, res) => {
   // Success
   req.session.loggedIn = true;
   req.session.user = user;
+  req.flash("success", "Successfully Login");
   return res.redirect("/");
 };
 
@@ -145,6 +146,7 @@ export const finishGithubLogin = async (req, res) => {
     // Success: Log In
     req.session.loggedIn = true;
     req.session.user = user;
+    req.flash("success", "Successfully Login");
     return res.redirect("/");
   } else {
     // Error: no 'access_token'
@@ -154,6 +156,7 @@ export const finishGithubLogin = async (req, res) => {
 
 /* Log Out */
 export const logout = (req, res) => {
+  req.flash("success", "Successfully Logged out");
   req.session.destroy();
   res.redirect("/");
 };

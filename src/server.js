@@ -21,8 +21,9 @@ app.use(loggerMiddleware);
 // Pug - View Engine
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views"); // Path of 'views' folder
-// URL Encode - POST form
-app.use(express.urlencoded({ extended: true }));
+// URL Encode
+app.use(express.urlencoded({ extended: true })); // POST form's body
+app.use(express.json()); // POST fetch's body
 // Session
 app.use(
   session({

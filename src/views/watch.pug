@@ -18,18 +18,31 @@ block content
   .video__data
     p= video.description
     small= video.createdAt
-  div
-    small Uploaded by &nbsp;
-      a(href=`/users/${video.owner._id}`) @#{ video.owner.name }
+    div
+      small Uploaded by &nbsp;
+        a(href=`/users/${video.owner._id}`) @#{ video.owner.name }
   if String(video.owner._id) === String(loggedInUser._id)
     a(href=`${video.id}/edit`) Edit Video &rarr;
     br
-    a(href=`${video.id}/delete`) Delete Video &rarr;
+    a#deleteVideo(href=`${video.id}/delete`) Delete Video &rarr;
   if loggedIn
-    .video__comments
+    .video__add-comments
       form#commentForm.video__comment-form
-        textarea(cols="30", rows="10", placeholder="write comment..")
+        textarea#commentTextarea(
+          cols="30",
+          rows="10",
+          placeholder="write comment..",
+          required
+        )
         button Add Comment
+  .video__comments
+    ul
+      each comment in video.comments.reverse()
+        li.video__comment(data-id=comment.id)
+          i.fas.fa-comment
+          span &nbsp;#{ comment.text }
+          if String(video.owner._id) === String(loggedInUser._id)
+            span.video__delete-comment &nbsp;❌
 
 block scripts
   script(src="/static/js/videoPlayer.js")

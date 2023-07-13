@@ -273,13 +273,23 @@
         2. Template에서 메시지를 보여주기
         - 'express-flash' 패키지는 자동으로 'res.locals'에 'messages'객체를 생성함
           - Template에서 'messages.메시지타입'으로 사용
-- **23-07-12 : #16.0 ~ #16.2**
-  - 16.3 3:33
+- **23-07-12 : #16.0 ~ #16.2 / Comment(1)**
+- **23-07-12 : #16.3 ~ #16.9 / Comment(2)**
+  - 비디오의 댓글창 만들기
+    1. Comment DB Model 생성하기
+    - Video, User 모델 수정 : Comment 모델과 연결성 부여
+    2. 시작파일에 DB Model을 import하기
+    3. Front-End에서 댓글차 만들기
+    - Template에 사용할 Script 파일 생성 및 작성
+    4. Back-End에서 동작하기
+    - Front-End에서 Back-End로 request 전송
+      ///// 순번 더 적기
+      ///// 삭제 버튼 기능 만들기
 
 ---
 
 - 10-2 / 5:20
-- #16.0 ~ #16.9 [10] / #17.0 ~ #17.10 [11]
+- #17.0 ~ #17.10 [11]
 
 ---
 

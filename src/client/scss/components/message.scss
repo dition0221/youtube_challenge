@@ -11,7 +11,7 @@
 
 .message {
   position: absolute;
-  top: 10px;
+  top: 20px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -20,7 +20,7 @@
   border-radius: 10000px;
   text-align: center;
   animation: goAway 0.5s ease-in-out forwards;
-  animation-delay: 5s;
+  animation-delay: 2s;
   font-weight: 600;
   color: black;
   &.error {

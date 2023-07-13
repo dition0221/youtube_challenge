@@ -1,6 +1,7 @@
 // DB Models
 import User from "../models/User";
 import Video from "../models/Video";
+import Comment from "./../models/Comment";
 
 /* Homepage - root router */
 export const home = async (req, res) => {
@@ -14,7 +15,7 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   // get video from DB
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
   // if no video
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
@@ -93,7 +94,7 @@ export const postUpload = async (req, res) => {
     });
     const user = await User.findById(_id);
     user.videos.push(newVideo._id);
-    user.save();
+    await user.save();
     return res.redirect("/");
   } catch (error) {
     return res.status(400).render("upload", {
@@ -120,9 +121,9 @@ export const deleteVideo = async (req, res) => {
   }
   // Success
   await Video.findByIdAndDelete(id); // Delete video
-  const user = User.findById(_id);
+  const user = await User.findById(_id);
   user.videos.splice(user.videos.indexOf(id), 1);
-  user.save(); // Delete video in user's video list
+  await user.save(); // Delete video in user's video list
   return res.redirect("/");
 };
 
@@ -139,7 +140,7 @@ export const search = async (req, res) => {
   return res.render("search", { pageTitle: "Search", videos });
 };
 
-/* API - Video's View */
+/* API - Video's View (조회수) */
 export const registerView = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
@@ -152,3 +153,33 @@ export const registerView = async (req, res) => {
   await video.save();
   return res.sendStatus(200);
 };
+
+/* API - Create comment (댓글 생성) */
+export const createComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { text },
+    session: { user },
+  } = req;
+  const video = await Video.findById(id);
+  const userDB = await User.findById(user._id);
+  if (!video || !userDB) {
+    res.sendStatus(404);
+  }
+  // Create comment
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+  // Update video's comments
+  video.comments.push(comment._id);
+  await video.save();
+  // Update user's comments
+  userDB.comments.push(comment._id);
+  await userDB.save();
+  return res.status(201).json({ newCommentId: comment._id });
+};
+
+/* API - Delete comment (댓글 삭제) */
+export const deleteComment = async (req, res) => {};

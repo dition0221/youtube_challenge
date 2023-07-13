@@ -8,6 +8,8 @@ const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
+const commentTextarea = document.getElementById("commentTextarea");
+const deleteVideoBtn = document.getElementById("deleteVideo");
 
 // f: Time Format
 const formatTime = (seconds) =>
@@ -135,17 +137,23 @@ video.addEventListener("ended", async () => {
 
 /* Keyboard shortcut */
 document.addEventListener("keyup", (event) => {
-  // [F] fullscreen
-  if (event.code === "KeyF") {
-    fullScreenBtn.click();
-  }
-  // [Space] play/Stop
-  if (event.code === "Space") {
-    playBtn.click();
-  }
-  // [M] Mute/Unmute
-  if (event.code === "KeyM") {
-    muteBtn.click();
+  // Except comment textarea
+  if (
+    !commentTextarea ||
+    (commentTextarea && String(event.target.id) !== String(commentTextarea.id))
+  ) {
+    // [F] fullscreen
+    if (event.code === "KeyF") {
+      fullScreenBtn.click();
+    }
+    // [Space] play/Stop
+    if (event.code === "Space") {
+      playBtn.click();
+    }
+    // [M] Mute/Unmute
+    if (event.code === "KeyM") {
+      muteBtn.click();
+    }
   }
 });
 
@@ -153,3 +161,13 @@ document.addEventListener("keyup", (event) => {
 video.addEventListener("click", () => {
   playBtn.click();
 });
+
+/* Confirm to delete video */
+if (deleteVideoBtn) {
+  deleteVideoBtn.addEventListener("click", (event) => {
+    const result = confirm("정말로 영상을 삭제하시겠습니까?");
+    if (!result) {
+      event.preventDefault();
+    }
+  });
+}
