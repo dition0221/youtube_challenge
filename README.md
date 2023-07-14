@@ -283,8 +283,16 @@
     - Template에 사용할 Script 파일 생성 및 작성
     4. Back-End에서 동작하기
     - Front-End에서 Back-End로 request 전송
-      ///// 순번 더 적기
-      ///// 삭제 버튼 기능 만들기
+    - fetch를 받을 API Router와 Controller 생성
+    5. Front-End에서 결과 표현하기
+    - 가짜 실시간 댓글 업데이트 만들기
+    6. 댓글 삭제 기능 추가하기 [Code Challenge]
+- **23-07-13 : #17.0 ~ #17.3 / Deploy(1)**
+  - 댓글 삭제 버튼 기능 추가 [Code Challenge]
+    - method: DELETE
+    - HTML element의 dataset 활용
+    - 사용자와 해당 댓글의 작성자가 일치하는지 확인
+- **23-07-14 : #17.4 ~ #17.10 / Deploy(2)**
 
 ---
 

@@ -163,7 +163,9 @@ export const createComment = async (req, res) => {
   } = req;
   const video = await Video.findById(id);
   const userDB = await User.findById(user._id);
+  // Check existence
   if (!video || !userDB) {
+    req.flash("error", "No video or user information.");
     res.sendStatus(404);
   }
   // Create comment
@@ -182,4 +184,23 @@ export const createComment = async (req, res) => {
 };
 
 /* API - Delete comment (댓글 삭제) */
-export const deleteComment = async (req, res) => {};
+export const deleteComment = async (req, res) => {
+  const { id } = req.params; // comment's id from template
+  // Check owner
+  const { _id } = req.session.user; // user's id from session
+  const comment = await Comment.findById(id);
+  if (!comment || !_id || String(comment.owner) !== String(_id)) {
+    req.flash("error", "No permission.");
+    return res.sendStatus(403);
+  }
+  // Success
+  const videoId = String(comment.video._id);
+  await Comment.findByIdAndDelete(id); // Delete comment
+  const user = await User.findById(_id);
+  user.videos.splice(user.videos.indexOf(id), 1);
+  await user.save(); // Delete comment in user's comments list
+  const video = await Video.findById(videoId);
+  video.comments.splice(video.comments.indexOf(id), 1);
+  await video.save(); // Delete comment in video's comments list
+  return res.sendStatus(201);
+};
