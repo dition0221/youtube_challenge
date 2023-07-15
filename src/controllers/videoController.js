@@ -52,8 +52,7 @@ export const postEdit = async (req, res) => {
   try {
     // Check video from DB
     const { id } = req.params;
-    const video = await Video.exists({ _id: id });
-    console.log("video:" + video);
+    const video = await Video.findById(id);
     if (!video)
       return res.status(404).render("404", { pageTitle: "Video not found." });
     // Check own user
@@ -64,10 +63,8 @@ export const postEdit = async (req, res) => {
       req.flash("error", "You are not the owner of the video.");
       return res.status(403).redirect("/");
     }
-    1;
     // Success: Update video to DB
     const { title, description, hashtags } = req.body;
-    console.log("body:" + req.body);
     const updatedVideo = await Video.findByIdAndUpdate(
       id,
       {
@@ -77,7 +74,6 @@ export const postEdit = async (req, res) => {
       },
       { new: true }
     );
-    console.log("updatedVideo:" + updatedVideo);
     if (!updatedVideo) {
       throw new Error("Failed to update video.");
     }
