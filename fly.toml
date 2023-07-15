@@ -13,3 +13,6 @@ primary_region = "nrt"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+
+[env]
+  NODE_ENV = "production"

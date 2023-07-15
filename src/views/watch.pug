@@ -2,7 +2,10 @@ extends base
 
 block content
   #videoContainer(data-id=video._id)
-    video(src="/" + video.fileUrl, width="100%")
+    if isFlyio
+      video(src=video.fileUrl, width="100%", crossorigin)
+    else
+      video(src="/" + video.fileUrl, width="100%", crossorigin)
     #videoControls
       button#play Play
       button#mute Mute

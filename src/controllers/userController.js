@@ -191,10 +191,11 @@ export const postEdit = async (req, res) => {
     });
   }
   // Update DB
+  const isFlyio = process.env.NODE_ENV === "production"; // Local or Deploy
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? file.path : avatarUrl,
+      avatarUrl: file ? (isFlyio ? file.location : file.path) : avatarUrl,
       name,
       email,
       username,

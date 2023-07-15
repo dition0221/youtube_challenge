@@ -82,11 +82,16 @@ export const postUpload = async (req, res) => {
   } = req.session;
   const { video, thumb } = req.files;
   const { title, description, hashtags } = req.body;
+  const isFlyio = process.env.NODE_ENV === "production"; // Local or Deploy
   // Save to DB
   try {
     const newVideo = await Video.create({
-      fileUrl: video[0].path.replace(/\\\\/g, "/"),
-      thumbUrl: thumb[0].path.replace(/\\\\/g, "/"),
+      fileUrl: isFlyio
+        ? video[0].location.replace(/\\\\/g, "/")
+        : video[0].path.replace(/\\\\/g, "/"),
+      thumbUrl: isFlyio
+        ? thumb[0].location.replace(/\\\\/g, "/")
+        : thumb[0].path.replace(/\\\\/g, "/"),
       title,
       description,
       hashtags: Video.formatHashtags(hashtags),

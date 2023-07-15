@@ -1,11 +1,20 @@
 mixin video(video)
   a.video-mixin(href=`/videos/${video.id}`)
     .video-mixin__thumb
-      img(
-        src=`${video.thumbUrl}`,
-        alt="Thumbnail",
-        style="object-fit: cover; width: 100%; height: 100%"
-      )
+      if isFlyio
+        img(
+          src=`${video.thumbUrl}`,
+          alt="Thumbnail",
+          style="object-fit: cover; width: 100%; height: 100%",
+          crossorigin
+        )
+      else
+        img(
+          src=`/${video.thumbUrl}`,
+          alt="Thumbnail",
+          style="object-fit: cover; width: 100%; height: 100%",
+          crossorigin
+        )
     .video-mixin__data
       span.video-mixin__title= video.title
       .video-mixin__meta

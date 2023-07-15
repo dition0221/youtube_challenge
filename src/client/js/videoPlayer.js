@@ -140,7 +140,7 @@ document.addEventListener("keyup", (event) => {
   // Except comment textarea
   if (
     !commentTextarea ||
-    (commentTextarea && String(event.target.id) !== String(commentTextarea.id))
+    String(event.target.id) !== String(commentTextarea.id)
   ) {
     // [F] fullscreen
     if (event.code === "KeyF") {
@@ -148,11 +148,23 @@ document.addEventListener("keyup", (event) => {
     }
     // [Space] play/Stop
     if (event.code === "Space") {
+      isSpaceKeyPressed = false;
+      event.preventDefault();
       playBtn.click();
     }
     // [M] Mute/Unmute
     if (event.code === "KeyM") {
       muteBtn.click();
+    }
+  }
+});
+document.addEventListener("keydown", (event) => {
+  if (
+    !commentTextarea ||
+    String(event.target.id) !== String(commentTextarea.id)
+  ) {
+    if (event.code === "Space") {
+      event.preventDefault();
     }
   }
 });

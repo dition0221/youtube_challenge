@@ -15,13 +15,16 @@ header
           a(href="/users/logout") Log Out
         li
           a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl ===""
-              span 😋
+            if !loggedInUser.avatarUrl || loggedInUser.avatarUrl === ""
+              img.header__avatar(
+                src="../../img/avatar_default.png",
+                crossorigin
+              )
             else
-              if loggedInUser.socialOnly
-                img.header__avatar(src=loggedInUser.avatarUrl)
+              if isFlyio
+                img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)
               else
-                img.header__avatar(src="/" + loggedInUser.avatarUrl)
+                img.header__avatar(src="/" + loggedInUser.avatarUrl, crossorigin)
       else
         li
           a(href="/login") Log In
