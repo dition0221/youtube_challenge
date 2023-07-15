@@ -109,8 +109,8 @@ export const deleteVideoMiddleware = async (req, res, next) => {
   if (!video) {
     return next();
   }
-  const key1 = `videos/${video.fileUrl.split("/")[4]}`;
-  const key2 = `videos/${video.thumbUrl.split("/")[4]}`;
+  const key1 = `videos/${video.fileUrl.split("/")[4].replace("+", " ")}`;
+  const key2 = `videos/${video.thumbUrl.split("/")[4].replace("+", " ")}`;
   const params1 = {
     Bucket: "dition-wetube",
     Key: key1,
