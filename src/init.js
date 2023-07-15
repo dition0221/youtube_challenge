@@ -9,9 +9,10 @@ import "./models/Comment";
 import app from "./server";
 
 // 서버의 port 번호
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0";
 
 /* 서버 실행 */
-app.listen(PORT, () =>
+app.listen(PORT, HOST, () =>
   console.log(`✅ Server Connected: http://localhost:${PORT} 🚀`)
 );
