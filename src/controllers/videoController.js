@@ -49,27 +49,39 @@ export const getEdit = async (req, res) => {
 
 /* Edit Video (POST) */
 export const postEdit = async (req, res) => {
-  // Check video from DB
-  const { id } = req.params;
-  const video = await Video.exists({ _id: id });
-  if (!video)
-    return res.status(404).render("404", { pageTitle: "Video not found." });
-  // Check own user
-  const {
-    user: { _id },
-  } = req.session;
-  if (String(video.owner) !== String(_id)) {
-    return res.status(403).redirect("/");
+  try {
+    // Check video from DB
+    const { id } = req.params;
+    const video = await Video.exists({ _id: id });
+    if (!video)
+      return res.status(404).render("404", { pageTitle: "Video not found." });
+    // Check own user
+    const {
+      user: { _id },
+    } = req.session;
+    if (String(video.owner) !== String(_id)) {
+      return res.status(403).redirect("/");
+    }
+    // Success: Update video to DB
+    const { title, description, hashtags } = req.body;
+    const updatedVideo = await Video.findByIdAndUpdate(
+      id,
+      {
+        title,
+        description,
+        hashtags: Video.formatHashtags(hashtags),
+      },
+      { new: true }
+    );
+    if (!updatedVideo) {
+      throw new Error("Failed to update video.");
+    }
+    req.flash("success", "Changes saved.");
+    return res.redirect(`/videos/${id}`);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).render("404", { pageTitle: "Server Error" });
   }
-  // Success: Update video to DB
-  const { title, description, hashtags } = req.body;
-  await Video.findByIdAndUpdate(id, {
-    title,
-    description,
-    hashtags: Video.formatHashtags(hashtags),
-  });
-  req.flash("success", "Changes saved.");
-  return res.redirect(`/videos/${id}`);
 };
 
 /* Upload Video (GET) */

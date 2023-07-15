@@ -35,7 +35,7 @@ const s3VideoUploader = multerS3({
   contentType: multerS3.AUTO_CONTENT_TYPE,
   key: function (req, file, cb) {
     const folderName = "videos";
-    const fileName = Date.now() + "-" + file.originalname;
+    const fileName = Date.now() + "-" + file.originalname.replace(/\..*$/, "");
     const fullPath = folderName + "/" + fileName;
     cb(null, fullPath);
   },
@@ -104,13 +104,13 @@ export const deleteAvatarMiddleware = async (req, res, next) => {
   next();
 };
 export const deleteVideoMiddleware = async (req, res, next) => {
-  if (!req.file) {
-    return next();
-  }
   const { id } = req.params; // video id
   const video = await Video.findById(id);
-  const key1 = `videos/${video.fileUrl.split("/")[4]}`;
-  const key2 = `videos/${video.thumbUrl.split("/")[4]}`;
+  if (!video) {
+    return next();
+  }
+  const key1 = `videos/${video.fileUrl.split("/")[4]}.mp4`;
+  const key2 = `videos/${video.thumbUrl.split("/")[4]}.jpg`;
   const params1 = {
     Bucket: "dition-wetube",
     Key: key1,
