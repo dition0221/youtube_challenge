@@ -2,6 +2,8 @@
 import User from "../models/User";
 import Video from "../models/Video";
 import Comment from "./../models/Comment";
+// AWS
+import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 /* Homepage - root router */
 export const home = async (req, res) => {
@@ -124,7 +126,20 @@ export const deleteVideo = async (req, res) => {
   if (String(video.owner) !== String(_id)) {
     return res.status(403).redirect("/");
   }
-  // Success
+  // Success: AWS
+  const key = `videos/${video.fileUrl.split("/")[4]}`;
+  const params = {
+    Bucket: "dition-wetube",
+    Key: key,
+  };
+  try {
+    const data = await s3.send(new DeleteObjectCommand(params));
+    console.log("Success. Object deleted.", data);
+  } catch (err) {
+    console.log("Error", err);
+    return res.redirect("/user/edit");
+  }
+  // Success: DB
   await Video.findByIdAndDelete(id); // Delete video
   const user = await User.findById(_id);
   user.videos.splice(user.videos.indexOf(id), 1);

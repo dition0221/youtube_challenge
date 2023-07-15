@@ -32,7 +32,7 @@ videoRouter
   .route("/:id([0-9a-f]{24})/edit")
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(deleteAvatarMiddleware, postEdit);
+  .post(postEdit);
 videoRouter.get("/:id([0-9a-f]{24})/delete", protectorMiddleware, deleteVideo);
 
 export default videoRouter;

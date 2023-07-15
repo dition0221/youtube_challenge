@@ -22,7 +22,7 @@ userRouter
   .route("/edit")
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(avatarUpload.single("avatar"), postEdit);
+  .post(avatarUpload.single("avatar"), deleteAvatarMiddleware, postEdit);
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
 userRouter.get("/logout", protectorMiddleware, logout);

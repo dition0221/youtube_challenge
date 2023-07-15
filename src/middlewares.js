@@ -86,12 +86,9 @@ export const videoUpload = multer({
 /* Delete ex-avatar file on AWS */
 export const deleteAvatarMiddleware = async (req, res, next) => {
   if (!req.file) {
-    console.log("!req.file");
     return next();
   }
-  console.log(`images/${req.session.user.avatarUrl.split("/")[4]}`);
   const key = `images/${req.session.user.avatarUrl.split("/")[4]}`;
-  console.log(`key: ${key}`);
   const params = {
     Bucket: "dition-wetube",
     Key: key,
