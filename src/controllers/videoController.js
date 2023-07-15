@@ -126,25 +126,6 @@ export const deleteVideo = async (req, res) => {
   if (String(video.owner) !== String(_id)) {
     return res.status(403).redirect("/");
   }
-  // Success: AWS
-  const key1 = `videos/${video.fileUrl.split("/")[4]}`;
-  const key2 = `videos/${video.thumbUrl.split("/")[4]}`;
-  const params1 = {
-    Bucket: "dition-wetube",
-    Key: key1,
-  };
-  const params2 = {
-    Bucket: "dition-wetube",
-    Key: key2,
-  };
-  try {
-    const data1 = await s3.send(new DeleteObjectCommand(params1));
-    const data2 = await s3.send(new DeleteObjectCommand(params2));
-    console.log("Success. Object deleted.", data1, data2);
-  } catch (err) {
-    console.log("Error", err);
-    return res.redirect("/");
-  }
   // Success: DB
   await Video.findByIdAndDelete(id); // Delete video
   const user = await User.findById(_id);

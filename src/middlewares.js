@@ -1,6 +1,7 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import Video from "./models/Video";
 
 // Local or Deploy
 const isFlyio = process.env.NODE_ENV === "production";
@@ -83,7 +84,7 @@ export const videoUpload = multer({
   storage: isFlyio ? s3VideoUploader : undefined,
 });
 
-/* Delete ex-avatar file on AWS */
+/* Delete ex-file on AWS */
 export const deleteAvatarMiddleware = async (req, res, next) => {
   if (!req.file) {
     return next();
@@ -99,6 +100,32 @@ export const deleteAvatarMiddleware = async (req, res, next) => {
   } catch (err) {
     console.log("Error", err);
     return res.redirect("/users/edit");
+  }
+  next();
+};
+export const deleteVideoMiddleware = async (req, res, next) => {
+  if (!req.file) {
+    return next();
+  }
+  const { id } = req.params; // video id
+  const video = await Video.findById(id);
+  const key1 = `videos/${video.fileUrl.split("/")[4]}`;
+  const key2 = `videos/${video.thumbUrl.split("/")[4]}`;
+  const params1 = {
+    Bucket: "dition-wetube",
+    Key: key1,
+  };
+  const params2 = {
+    Bucket: "dition-wetube",
+    Key: key2,
+  };
+  try {
+    const data1 = await s3.send(new DeleteObjectCommand(params1));
+    const data2 = await s3.send(new DeleteObjectCommand(params2));
+    console.log("Success. Object deleted.", data1, data2);
+  } catch (err) {
+    console.log("Error", err);
+    return res.redirect("/");
   }
   next();
 };

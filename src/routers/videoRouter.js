@@ -8,7 +8,7 @@ import {
   deleteVideo,
 } from "../controllers/videoController";
 import {
-  deleteAvatarMiddleware,
+  deleteVideoMiddleware,
   protectorMiddleware,
   videoUpload,
 } from "../middlewares";
@@ -33,6 +33,11 @@ videoRouter
   .all(protectorMiddleware)
   .get(getEdit)
   .post(postEdit);
-videoRouter.get("/:id([0-9a-f]{24})/delete", protectorMiddleware, deleteVideo);
+videoRouter.get(
+  "/:id([0-9a-f]{24})/delete",
+  protectorMiddleware,
+  deleteVideoMiddleware,
+  deleteVideo
+);
 
 export default videoRouter;
