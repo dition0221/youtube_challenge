@@ -98,7 +98,7 @@ export const deleteAvatarMiddleware = async (req, res, next) => {
     console.log("Success. Object deleted.", data);
   } catch (err) {
     console.log("Error", err);
-    return res.redirect("/user/edit");
+    return res.redirect("/users/edit");
   }
   next();
 };
