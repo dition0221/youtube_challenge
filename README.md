@@ -274,7 +274,7 @@
         - 'express-flash' 패키지는 자동으로 'res.locals'에 'messages'객체를 생성함
           - Template에서 'messages.메시지타입'으로 사용
 - **23-07-12 : #16.0 ~ #16.2 / Comment(1)**
-- **23-07-12 : #16.3 ~ #16.9 / Comment(2)**
+- **23-07-13 : #16.3 ~ #16.9 / Comment(2)**
   - 비디오의 댓글창 만들기
     1. Comment DB Model 생성하기
     - Video, User 모델 수정 : Comment 모델과 연결성 부여
@@ -287,12 +287,41 @@
     5. Front-End에서 결과 표현하기
     - 가짜 실시간 댓글 업데이트 만들기
     6. 댓글 삭제 기능 추가하기 [Code Challenge]
-- **23-07-13 : #17.0 ~ #17.3 / Deploy(1)**
+- **23-07-14 : #17.0 ~ #17.3 / Deploy(1)**
   - 댓글 삭제 버튼 기능 추가 [Code Challenge]
     - method: DELETE
     - HTML element의 dataset 활용
     - 사용자와 해당 댓글의 작성자가 일치하는지 확인
-- **23-07-14 : #17.4 ~ #17.10 / Deploy(2)**
+  - Build
+    - Back-End: 'babel-CLI'패키지를 이용
+      - script 생성: "build:server": "babel src -d build --ignore src/client"
+    - Front-End
+      - Webpack 설정 변경: mode와 watch 삭제 (development와 production일 때 따로 적용하기 위해)
+      - script 생성 및 수정
+        - "build:assets": "webpack --mode=production"
+        - "dev:assets": "webpack --mode=development -w"
+    - build된 파일을 시작하는 script 생성
+      - "build": "npm run build:server && npm run build:assets"
+      - "start": "node build/init.js"
+  - 웹 사이트에 배포하기 (Heroku)
+    1. 계정 생성
+    2. 새 앱 만들기(Create new app): App name, region 등 설정 후 생성
+    3. Heroku에 Back-end 서버를 업로드 (Heroku git 방법 (Github 방법도 존재))
+       1. Heroku CLI 설치
+       2. 터미널에 'heroku login'을 입력해 로그인
+       3. git repository가 필요하므로 존재하는지 확인
+       - 없으면 'git init'하기
+       4. 터미널에 'heroku git:remote -a 앱이름' 복붙하기
+       - heroku remote를 얻어, git에서 Heroku에게 push할 수 있다는 의미
+       - Heroku는 오직 나의 git history만 확인함
+         - 코드 변경 시 commit 할 것
+       5. 배포하기 전, 터미널에 'heroku logs --tail' 실행
+       - 서버나 Heroku의 log를 볼 수 있게 함
+       6. 배포: 터미널에 'git push heroku master'
+       - 'heroku git:remote -a 앱이름'을 한 같은 디렉토리에서 실행
+       7. 문제 발생: 환경변수(.env)파일을 참조할 수 없는 문제
+       - 환경변수(.env)파일은 .gitignore되어있어 참조할 수 없기 때문
+- **23-07-15 : #17.4 ~ #17.10 / Deploy(2)**
 
 ---
 

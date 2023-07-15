@@ -9,7 +9,7 @@ import "./models/Comment";
 import app from "./server";
 
 // 서버의 port 번호
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 /* 서버 실행 */
 app.listen(PORT, () =>
