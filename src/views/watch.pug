@@ -6,24 +6,35 @@ block content
       video(src=video.fileUrl, width="100%", crossorigin)
     else
       video(src="/" + video.fileUrl, width="100%", crossorigin)
-    #videoControls
-      button#play Play
-      button#mute Mute
-      input#volume(type="range", min="0", max="1", step="0.1", value="0.5")
+    #videoControls.videoControls
+      .videoControls__play
+        span#play.videoControls__playBtn
+          i.fas.fa-play
+        .videoControls__time
+          span#currenTime 00:00
+          span /
+          span#totalTime 00:00
+      input#timeline.videoControls__timeline(
+        type="range",
+        step="1",
+        value="0",
+        min="0"
+      )
+      .videoControls__volume
+        input#volume(type="range", step="0.1", value=0.5, min="0", max="1")
+        span#mute
+          i.fas.fa-volume-up
       div
-        span#currentTime 00:00
-        span &nbsp;/&nbsp;
-        span#totalTime 00:00
-      div
-        input#timeline(type="range", min="0", step="1", value="0")
-      div
-        button#fullScreen Enter Full Screen
+        span#fullScreen
+          i.fas.fa-expand
+
   .video__data
-    p= video.description
-    small= video.createdAt
-    div
+    h1.video__data-title= video.title
+    .video__data-uploader
       small Uploaded by &nbsp;
         a(href=`/users/${video.owner._id}`) @#{ video.owner.name }
+    p.video__data-description= video.description
+    small.video__data-date= video.createdAt
   if String(video.owner._id) === String(loggedInUser._id)
     a(href=`${video.id}/edit`) Edit Video &rarr;
     br
@@ -32,8 +43,8 @@ block content
     .video__add-comments
       form#commentForm.video__comment-form
         textarea#commentTextarea(
-          cols="30",
-          rows="10",
+          cols="20",
+          rows="1",
           placeholder="write comment..",
           required
         )

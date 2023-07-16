@@ -223,5 +223,5 @@ export const deleteComment = async (req, res) => {
   const video = await Video.findById(videoId);
   video.comments.splice(video.comments.indexOf(id), 1);
   await video.save(); // Delete comment in video's comments list
-  return res.sendStatus(201);
+  return res.sendStatus(204);
 };

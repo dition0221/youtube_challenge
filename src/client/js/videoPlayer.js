@@ -1,11 +1,14 @@
 const video = document.querySelector("video");
 const playBtn = document.getElementById("play");
+const playBtnIcon = playBtn.querySelector("i");
 const muteBtn = document.getElementById("mute");
+const muteBtnIcon = muteBtn.querySelector("i");
 const volumeRange = document.getElementById("volume");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreen");
+const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 const commentTextarea = document.getElementById("commentTextarea");
@@ -30,10 +33,10 @@ playBtn.addEventListener("click", () => {
   } else {
     video.pause();
   }
-  playBtn.innerText = video.paused ? "Play" : "Pause";
+  playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
 });
 video.addEventListener("ended", () => {
-  playBtn.innerText = "Play";
+  playBtnIcon.classList = "fas fa-play";
 });
 
 /* Mute Button */
@@ -45,7 +48,9 @@ muteBtn.addEventListener("click", () => {
     volumeValue = volumeRange.value;
     video.muted = true;
   }
-  muteBtn.innerText = video.muted ? "Unmute" : "Mute";
+  muteBtnIcon.classList = video.muted
+    ? "fas fa-volume-mute"
+    : "fas fa-volume-up";
   volumeRange.value = video.muted ? 0 : volumeValue;
 });
 
@@ -56,7 +61,8 @@ volumeRange.addEventListener("input", (event) => {
   } = event;
   video.volume = value;
   video.muted = value === "0" ? true : false;
-  muteBtn.innerText = value === "0" ? "Unmute" : "Mute";
+  muteBtnIcon.classList =
+    value === "0" ? "fas fa-volume-mute" : "fas fa-volume-up";
 });
 
 /* Volume Control (change) */
@@ -78,7 +84,7 @@ const handleMetadata = () => {
 // 새로고침해도 loadedmetadata가 실행되지 않는 문제 해결
 video.readyState
   ? handleMetadata()
-  : video.addEventListener("loadedmetadata", handleMetadata);
+  : video.addEventListener("loadeddata", handleMetadata);
 
 /* Current Time */
 video.addEventListener("timeupdate", () => {
@@ -104,15 +110,15 @@ fullScreenBtn.addEventListener("click", () => {
   }
 });
 document.addEventListener("fullscreenchange", () => {
-  fullScreenBtn.innerText = document.fullscreenElement
-    ? "Exit Full Screen"
-    : "Enter Full Screen";
+  fullScreenIcon.classList = document.fullscreenElement
+    ? "fas fa-compress"
+    : "fas fa-expand";
 });
 
 /* Show video controls */
 const hideControls = () => videoControls.classList.remove("showing");
 // Appear
-video.addEventListener("mousemove", () => {
+videoContainer.addEventListener("mousemove", () => {
   if (controlsTimeout) {
     clearTimeout(controlsTimeout);
     controlsTimeout = null;
@@ -125,7 +131,7 @@ video.addEventListener("mousemove", () => {
   controlsMovementTimeout = setTimeout(hideControls, 3000);
 });
 // Disappear
-video.addEventListener("mouseleave", () => {
+videoContainer.addEventListener("mouseleave", () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 });
 

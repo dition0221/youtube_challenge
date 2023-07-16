@@ -23,7 +23,7 @@ const s3ImageUploader = multerS3({
   contentType: multerS3.AUTO_CONTENT_TYPE,
   key: function (req, file, cb) {
     const folderName = "images";
-    const fileName = Date.now() + "-" + file.originalname;
+    const fileName = Date.now() + "-" + file.originalname.replace(" ", "");
     const fullPath = folderName + "/" + fileName;
     cb(null, fullPath);
   },
@@ -35,7 +35,10 @@ const s3VideoUploader = multerS3({
   contentType: multerS3.AUTO_CONTENT_TYPE,
   key: function (req, file, cb) {
     const folderName = "videos";
-    const fileName = Date.now() + "-" + file.originalname.replace(/\..*$/, "");
+    const fileName =
+      Date.now() +
+      "-" +
+      file.originalname.replace(" ", "").replace(/\..*$/, ""); // 공백+확장자 제거
     const fullPath = folderName + "/" + fileName;
     cb(null, fullPath);
   },
@@ -48,6 +51,7 @@ export const localsMiddleware = (req, res, next) => {
   // user
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user || {};
+  // deploy
   res.locals.isFlyio = isFlyio;
   next();
 };
@@ -109,8 +113,8 @@ export const deleteVideoMiddleware = async (req, res, next) => {
   if (!video) {
     return next();
   }
-  const key1 = `videos/${video.fileUrl.split("/")[4].replace("+", " ")}`;
-  const key2 = `videos/${video.thumbUrl.split("/")[4].replace("+", " ")}`;
+  const key1 = `videos/${video.fileUrl.split("/")[4]}`;
+  const key2 = `videos/${video.thumbUrl.split("/")[4]}`;
   const params1 = {
     Bucket: "dition-wetube",
     Key: key1,

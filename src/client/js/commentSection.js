@@ -19,7 +19,7 @@ const handleDeleteComment = async (event) => {
     },
   });
   // Success: Delete comment immediately
-  if (response.status === 201) {
+  if (response.status === 204) {
     deleteComment(commentId);
   }
 };

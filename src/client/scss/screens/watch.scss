@@ -1,3 +1,60 @@
+.video__data {
+  .video__data-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .video__data-uploader {
+    margin-bottom: 10px;
+    a {
+      text-decoration: underline;
+      color: $red;
+    }
+  }
+  .video__data-description {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .video__data-date {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+}
+
+.video__add-comments {
+  form {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  textarea {
+    resize: none;
+    width: 90%;
+    background-color: black;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-bottom: 2px solid darkgray;
+    transition: border-bottom 0.2s ease-in-out;
+    white-space: pre-wrap;
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid white;
+    }
+  }
+  button {
+    width: 10%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
 .video__comments {
   display: flex;
   flex-direction: column;
@@ -6,10 +63,15 @@
   margin: 0 auto;
   margin-top: 20px;
   .video__comment {
-    padding: 10px;
+    width: 100%;
+    padding: 15px;
+    margin: 10px;
     border-radius: 9999px;
     background-color: white;
     color: black;
     margin-bottom: 10px;
+  }
+  .video__delete-comment {
+    cursor: pointer;
   }
 }
