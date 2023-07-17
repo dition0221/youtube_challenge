@@ -27,6 +27,7 @@ export const postJoin = async (req, res) => {
     });
   }
   // Save user to DB
+  const avatarUrl = "../img/avatar_default.png"; // basic avatar
   try {
     await User.create({
       email,
@@ -34,6 +35,7 @@ export const postJoin = async (req, res) => {
       password,
       name,
       location,
+      avatarUrl,
     });
     return res.redirect("/login");
   } catch (error) {
