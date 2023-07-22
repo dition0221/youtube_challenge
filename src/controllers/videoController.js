@@ -210,6 +210,7 @@ export const deleteComment = async (req, res) => {
   // Check owner
   const { _id } = req.session.user; // user's id from session
   const comment = await Comment.findById(id);
+  console.log(comment, comment.owner, _id);
   if (!comment || !_id || String(comment.owner) !== String(_id)) {
     req.flash("error", "No permission.");
     return res.sendStatus(403);

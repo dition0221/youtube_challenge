@@ -5,6 +5,7 @@ const deleteCommentBtns = document.querySelectorAll(".video__delete-comment");
 /* f: Delete comment */
 const deleteComment = (id) => {
   const element = document.querySelector(`[data-id="${id}"]`);
+  console.log(element);
   element.remove();
 };
 
@@ -18,6 +19,10 @@ const handleDeleteComment = async (event) => {
       "Content-Type": "application/json",
     },
   });
+  // Fail
+  if (response.status === 403) {
+    location.reload();
+  }
   // Success: Delete comment immediately
   if (response.status === 204) {
     deleteComment(commentId);

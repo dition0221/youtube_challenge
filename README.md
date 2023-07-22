@@ -8,8 +8,90 @@
 
 ---
 
-노마드 코더 정책 상 강의요약은 괜찮으나, 코드와 필기는 공개적인 곳에 올리면 안 됨.  
-필기 요약지는 암호화된 .zip 파일로 저장함.
+**결과물 : https://dition-wetube.fly.dev/**
+
+> YouTube와 비슷한 동영상 웹 사이트입니다.
+> 전체적으로 동영상 시청 및 업로드, 댓글 기능을 제공합니다.
+> 사이트가 느리게 작동될 수 있습니다. (무료 배포, DB, 스토리지)
+> 배포 fly.io / DB mongoDB / 스토리지 AWS S3
+>
+> ![wetube-main](https://github.com/dition0221/youtube_challenge/assets/129196812/f70a2757-4ee4-4883-825f-d4084d7c153a)
+>
+> [ HOME(before log in)]
+>
+> - 홈 : 모든 동영상을 표시 (제목, 작성자, 조회수)
+> - SEARCH : 동영상 검색
+> - LOG IN : 로그인 및 소셜로그인(GitHub)
+> - JOIN : 회원 가입 (일반 또는 소셜 회원가입(GitHub))
+>
+> ![join](https://github.com/dition0221/youtube_challenge/assets/129196812/626940cf-e5cd-4039-9f0b-428e770bffa8)
+>
+> [ JOIN ]
+>
+> - 일반 및 소셜(GitHub) 회원가입
+> - (\*)표시는 필수 입력사항
+> - 'Email'과 'User Name'은 unique한 속성으로 DB에 저장 전에 검사를 진행
+> - 'Password'는 재차 확인 후 Hash화하여 DB에 저장
+>
+> ![login](https://github.com/dition0221/youtube_challenge/assets/129196812/1e9d4060-7b18-4f42-839c-3730d652193a)
+>
+> [ LOG IN ]
+>
+> - 일반 및 소셜(GitHub) 로그인
+> - 'Password'는 Hash한 후 DB에 저장된 값과 비교
+>
+> ![home](https://github.com/dition0221/youtube_challenge/assets/129196812/123ad9ee-ef27-4be5-ad78-64bd6dee99ba)
+>
+> [ HOME(after log in)]
+>
+> - UPLOAD VIDEO : 동영상 업로드
+> - EDIT PROFILE : 나의 프로필 수정
+> - LOG OUT : 로그아웃
+> - MY PROFILE : 나의 프로필 및 나의 동영상 확인
+>
+> ![image](https://github.com/dition0221/youtube_challenge/assets/129196812/7482c48f-60ea-4eb4-8c73-50ac85b908fb)
+>
+> [ UPLOAD VIDEO ]
+>
+> - Start Recording : 간단한 동영상 녹화 및 저장기능 제공
+>   - 카메라, 마이크 사용 권한 필요
+>   - 스트리밍을 사용해 현재 화면 미리보기 제공
+>   - 녹화 시 5초간 녹화 및 자동종료
+>   - 녹화된 동영상과 썸네일 이미지 다운로드 가능
+>   - 자동으로 사용자의 컴퓨터 리소스를 사용해 동영상 포맷 후 다운로드
+> - 동영상 파일, 썸네일 파일, 제목, 설명, 해시태그를 사용해 동영상 업로드 제공
+>
+> ![image](https://github.com/dition0221/youtube_challenge/assets/129196812/8f121eea-3d0c-466e-aecc-99d2408c78a1)
+>
+> [ EDIT PROFILE ]
+>
+> - 아바타 이미지, Name, Email, User Name, Location의 프로필 변경 가능
+>
+> ![image](https://github.com/dition0221/youtube_challenge/assets/129196812/7154c1bd-6a85-4a91-8f30-64eca49d5a15)
+>
+> [ MY PROFILE ]
+>
+> - 자신이 업로드한 동영상 목록을 확인
+>
+> ![image](https://github.com/dition0221/youtube_challenge/assets/129196812/0bc47da4-cf1d-4b1f-aec8-84c9985ab6dc)
+>
+> [ VIDEO ]
+>
+> - 비디오 컨트롤러
+>   - 동영상의 길이 표시
+>   - 마우스 커서가 동영상 위에 올 때 나타나며, 커서가 동영상 밖으로 나갈 시 일정 시간 후 사라짐
+>   - 동영상 타임라인, 음량 컨트롤러, 음소거, 전체화면 제공
+> - 비디오
+>   - 단축키 제공 : SPACE(재생/일시정지), F(전체화면), M(음소거 설정/해제)
+>   - 클릭 시 재생/일시정지
+> - 제목, 업로더(프로필 링크), 설명, 업로드 시간 등 표기
+> - 동영상 편집/삭제 : 업로더만 해당 기능을 볼 수 있고, 사용 가능
+> - 댓글 입력 칸 : 로그인한 사용자만 기능을 볼 수 있고, 사용 가능
+> - 댓글
+>   - 댓글 등록 시 (새로고침 없이) 실시간으로 화면에 바로 나타나게 설정
+>   - 자신의 댓글에만 삭제 버튼이 보여지며, 사용 가능
+
+---
 
 - **23-06-05 : #1.3 ~ #2.4 / Set up NodeJS and Packages (+ Quiz)**
   - NodeJS : 브라우저 밖에서 사용할 수 있는 JavaScript 런타임
@@ -325,10 +407,6 @@
 
 ---
 
-- 10-2 / 5:20
-
----
-
 1. **프로젝트 준비 및 패키지 설치**
    - NodeJS 설치
    - package.json 생성 (npm init)
@@ -396,3 +474,8 @@ Router
 /videos/:id/edit -> Edit Video
 /videos/:id/delete -> Delete Video
 /videos/upload -> Upload Video
+
+---
+
+노마드 코더 정책 상 강의요약은 괜찮으나, 코드와 필기는 공개적인 곳에 올리면 안 됨.  
+필기 요약지는 암호화된 .zip 파일로 저장함.
