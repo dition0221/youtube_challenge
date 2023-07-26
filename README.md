@@ -10,9 +10,9 @@
 
 **결과물 : https://dition-wetube.fly.dev/**
 
-> YouTube와 비슷한 동영상 웹 사이트입니다.
-> 전체적으로 동영상 시청 및 업로드, 댓글 기능을 제공합니다.
-> 사이트가 느리게 작동될 수 있습니다. (무료 배포, DB, 스토리지)
+> YouTube와 비슷한 동영상 웹 사이트입니다.  
+> 전체적으로 동영상 시청 및 업로드, 댓글 기능을 제공합니다.  
+> 사이트가 느리게 작동될 수 있습니다. (무료 배포, DB, 스토리지)  
 > 배포: fly.io / DB: mongoDB / 스토리지: AWS S3
 >
 > ![wetube-main](https://github.com/dition0221/youtube_challenge/assets/129196812/f70a2757-4ee4-4883-825f-d4084d7c153a)
